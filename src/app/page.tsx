@@ -1,7 +1,15 @@
+import Banner from "@/components/Banner";
+import Hero from "@/components/Hero";
+import Nav from "@/components/Nav";
+
 export default function Home() {
   return (
     <>
-      <h1>Genimea</h1>
+      <Banner />
+      <Nav />
+      <main>
+        <Hero />
+      </main>
     </>
   );
 }
