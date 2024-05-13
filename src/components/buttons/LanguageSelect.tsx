@@ -60,7 +60,7 @@ const LanguageSelect = () => {
     <div className="flex items-center">
       <GlobeAltIcon className="h-5 w-5 text-white" />
       <select
-        className="bg-textBlue text-white"
+        className="bg-textBlue text-white cursor-pointer"
         value={selectedLang}
         onChange={handleLanguageChange} // Use the handler function
       >
