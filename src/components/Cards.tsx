@@ -24,7 +24,7 @@ const Cards = () => {
 
   const contentFr = () => {
     return (
-      <div className="w-full flex justify-around md:flex-row flex-col z-20">
+      <div className="w-full flex justify-between md:flex-row flex-col z-20">
         <div className=" p-10 px-5 rounded-lg min-w-[200px] md:shadow-md flex flex-col items-start bg-textBlue md:w-4/12">
           <h2 className="text-3xl text-white font-bold mt-3">
             Quelques chiffres important
@@ -55,7 +55,7 @@ const Cards = () => {
 
   const contentEn = () => {
     return (
-      <div className="w-full flex justify-around md:flex-row flex-col">
+      <div className="w-full flex justify-between md:flex-row flex-col">
         <div className=" p-10 px-5 rounded-lg min-w-[200px] md:shadow-md flex flex-col items-start bg-textBlue md:w-4/12">
           <h2 className="text-2xl text-white font-bold mt-3">
             Some Important Figures
@@ -85,7 +85,7 @@ const Cards = () => {
   };
 
   return (
-    <section className="w-full relative flex justify-center max-w-7xl mx-auto items-center flex-col md:px-0 px-4 md:py-20 lg:px-8 py-10">
+    <section className="w-full relative flex justify-center max-w-7xl mx-auto items-center flex-col md:py-20 py-10 px-4">
       {selectedLang === "FR" ? contentFr() : contentEn()}
     </section>
   );
