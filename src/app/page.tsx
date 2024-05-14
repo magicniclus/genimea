@@ -1,9 +1,12 @@
 import Banner from "@/components/Banner";
 import Cards from "@/components/Cards";
+import Certificat from "@/components/Certificat";
 import FAQ from "@/components/FAQ";
 import Hero from "@/components/Hero";
 import Nav from "@/components/Nav";
 import PointsImportants from "@/components/PointsImportants";
+import Pricing from "@/components/Pricing";
+import Stats from "@/components/Stats";
 
 export default function Home() {
   return (
@@ -53,6 +56,10 @@ export default function Home() {
           {/* <Header /> */}
           <PointsImportants />
           <FAQ />
+          <Stats />
+          <Certificat />
+          {/* <PolarChart /> */}
+          <Pricing />
         </div>
       </main>
     </>
