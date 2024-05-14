@@ -100,7 +100,7 @@ const FAQ = () => {
 
   const contentFr = () => {
     return (
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             F.A.Q
@@ -111,7 +111,7 @@ const FAQ = () => {
             Contactez notre équipe de support en{" "}
             <a
               href="mailto:support@genimea.com"
-              className="font-semibold text-textBlue hover:text-textBlue"
+              className="font-semibold text-textBlue hover:text-textBlue/80"
             >
               nous adressant un email,
             </a>{" "}
@@ -138,7 +138,7 @@ const FAQ = () => {
 
   const contentEn = () => {
     return (
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
             Frequently asked questions
@@ -149,7 +149,7 @@ const FAQ = () => {
             contact our support team{" "}
             <a
               href="#"
-              className="font-semibold text-indigo-600 hover:text-indigo-500"
+              className="font-semibold text-textBlue hover:text-textBlue/80"
             >
               by sending us an email,
             </a>{" "}
