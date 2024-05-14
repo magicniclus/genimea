@@ -103,8 +103,8 @@ const PointsImportants = () => {
 
   const contentFr = () => {
     return (
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
-        <div className="mx-auto max-w-2xl lg:mx-0">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-y-20 px-4 xl:grid-cols-3">
+        <div className="mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Ce que ce test évalue :
           </h2>
@@ -143,7 +143,7 @@ const PointsImportants = () => {
 
   const contentEn = () => {
     return (
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-x-8 gap-y-20 px-4 xl:grid-cols-3">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             What This Test Evaluates:
