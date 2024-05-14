@@ -2,6 +2,7 @@ import Banner from "@/components/Banner";
 import Cards from "@/components/Cards";
 import Certificat from "@/components/Certificat";
 import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Nav from "@/components/Nav";
 import PointsImportants from "@/components/PointsImportants";
@@ -62,6 +63,7 @@ export default function Home() {
           <Pricing />
         </div>
       </main>
+      <Footer />
     </>
   );
 }
