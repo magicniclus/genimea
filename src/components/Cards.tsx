@@ -25,7 +25,16 @@ const Cards = () => {
   const contentFr = () => {
     return (
       <div className="w-full flex justify-around md:flex-row flex-col z-20">
-        <div className=" p-10 rounded-lg min-w-[200px] md:shadow-md flex flex-col items-center bg-white">
+        <div className=" p-10 px-5 rounded-lg min-w-[200px] md:shadow-md flex flex-col items-start bg-textBlue md:w-4/12">
+          <h2 className="text-3xl text-white font-bold mt-3">
+            Quelques chiffres important
+          </h2>
+          <p className="text-md text-white">
+            Nos tests de QI sont le fruit de 7 de recherche et sont tous
+            certifiés.
+          </p>
+        </div>
+        <div className=" p-10 rounded-lg min-w-[200px] md:shadow-md flex flex-col items-center bg-white md:mt-0 mt-5">
           <AcademicCapIcon className="h-16 w-16 text-yellow" />
           <h2 className="text-2xl text-gray-900 font-bold mt-3">+3M</h2>
           <p className="text-md text-gray-900">tests réalisés</p>
@@ -47,7 +56,16 @@ const Cards = () => {
   const contentEn = () => {
     return (
       <div className="w-full flex justify-around md:flex-row flex-col">
-        <div className=" p-10 rounded-lg min-w-[200px] md:shadow-md flex flex-col items-center">
+        <div className=" p-10 px-5 rounded-lg min-w-[200px] md:shadow-md flex flex-col items-start bg-textBlue md:w-4/12">
+          <h2 className="text-2xl text-white font-bold mt-3">
+            Some Important Figures
+          </h2>
+          <p className="text-md text-white">
+            Our IQ tests are the result of 7 years of research and are all
+            certified.
+          </p>
+        </div>
+        <div className=" p-10 rounded-lg min-w-[200px] md:shadow-md flex flex-col items-center md:mt-0 mt-5">
           <AcademicCapIcon className="h-16 w-16 text-yellow" />
           <h2 className="text-2xl text-gray-900 font-bold mt-3">+3M</h2>
           <p className="text-md text-gray-900">Tests Administered</p>
