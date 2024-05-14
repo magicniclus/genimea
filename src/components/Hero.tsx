@@ -109,11 +109,11 @@ const Hero = () => {
         <div className="relative z-5  group">
           <div className="relative mt-14 md:mt-0">
             <div
-              className="absolute -top-5 -right-5 border-2 border-textBlue rounded-xl w-[290px] h-full group-hover:translate-y-6 group-hover:-translate-x-16 transition duration-300 ease-in-out"
+              className="absolute -top-5 -right-5 md:block hidden border-2 border-textBlue rounded-xl w-[400px] h-full group-hover:translate-y-6 group-hover:-translate-x-16 transition duration-300 ease-in-out"
               style={{ zIndex: 10 }}
             ></div>
             <img
-              className="max-w-[300px] relative z-20 rounded-xl shadow-xl group group-hover:-translate-y-6 group-hover:translate-x-6 transition duration-300 ease-in-out"
+              className="w-[400px] relative z-20 rounded-xl shadow-xl group group-hover:-translate-y-6 group-hover:translate-x-6 transition duration-300 ease-in-out"
               src="./images/computer.png"
               alt="background"
               style={{ zIndex: 20, left: "0", top: "0" }}
