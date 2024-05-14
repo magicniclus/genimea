@@ -90,7 +90,7 @@ const Stats = () => {
         {title}
       </h2>
       <div className="flex flex-col md:flex-row w-full justify-between mt-10">
-        <div className="w-full md:w-7/12">
+        <div className="w-full md:w-7/12 min-h-[50px]">
           <Bar data={data} options={options} />
         </div>
         <div className="md:w-4/12 w-full col-span-1 sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:mt-14 mt-7">
