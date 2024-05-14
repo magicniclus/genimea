@@ -29,7 +29,7 @@ const Certificat = () => {
           <div className="mt-10 flex items-center gap-x-6">
             <a
               href="#"
-              className="rounded-md bg-yellow px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow"
+              className="px-6 py-2 bg-textBlue rounded-md text-white text-2xl hover:text-textBlue hover:bg-white hover:border hover:border-textBlue hover:border-2 transition duration-300 ease-in-out text-center md:text-start group flex max-w-[fit-content]"
             >
               Commencer mon test
             </a>
@@ -60,7 +60,7 @@ const Certificat = () => {
           <div className="mt-10 flex items-center gap-x-6">
             <a
               href="#"
-              className="rounded-md bg-yellow px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow"
+              className="px-6 py-2 bg-textBlue rounded-md text-white text-2xl hover:text-textBlue hover:bg-white hover:border hover:border-textBlue hover:border-2 transition duration-300 ease-in-out text-center md:text-start group flex max-w-[fit-content]"
             >
               Start my test
             </a>
