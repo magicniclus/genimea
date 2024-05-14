@@ -19,8 +19,8 @@ const Certificat = () => {
 
   const contentFr = () => {
     return (
-      <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32 lg:px-8 flex justify-between md:flex-row flex-col w-full items-center">
-        <div className="w-6/12">
+      <div className="mx-auto max-w-6xl px-4 py-24 sm:py-32 flex justify-between md:flex-row flex-col w-full items-center">
+        <div className="w-full md:w-6/12">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Obtenez votre certificat
             <br />
@@ -35,12 +35,12 @@ const Certificat = () => {
             </a>
           </div>
         </div>
-        <div className="w-6/12 flex justify-cener">
-          <div className="overflow-hidden rounded-md w-full shadow-lg">
+        <div className="w-full md:w-6/12 min-h-[200px] flex justify-center md:mt-0 mt-10">
+          <div className="overflow-hidden rounded-md w-full min-h-[200px] shadow-lg">
             <img
               src="./images/certificatFr.png"
               alt="certificate"
-              className="hidden sm:block w-full h-auto object-cover"
+              className="w-full h-auto min-h-[200px] object-cover"
             />
           </div>
         </div>
@@ -50,7 +50,7 @@ const Certificat = () => {
 
   const contentEn = () => {
     return (
-      <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32 lg:px-8 flex justify-between md:flex-row flex-col w-full items-center">
+      <div className="mx-auto max-w-6xl px-4 py-24 sm:py-32 flex justify-between md:flex-row flex-col w-full items-center">
         <div className="w-6/12">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Get your
@@ -71,7 +71,7 @@ const Certificat = () => {
             <img
               src="./images/certificatEn.png"
               alt="certificate"
-              className="hidden sm:block w-full h-auto object-cover"
+              className="w-full h-auto object-cover"
             />
           </div>
         </div>
