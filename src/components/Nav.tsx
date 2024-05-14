@@ -48,9 +48,10 @@ const Nav = () => {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
       >
-        <a href="#" className="-m-1.5 p-1.5">
+        <a href="#" className="-m-1.5 p-1.5 flex items-center">
           <span className="sr-only">Genimea</span>
-          <img className="h-8 w-auto" src="./logo.png" alt="logo" />
+          <img className="h-8 w-auto" src="./logoWhite.png" alt="logo" />
+          <span className="text-white text-xl font-bold ml-1">Genimea</span>
         </a>
         <div className="flex lg:hidden">
           <button
@@ -90,9 +91,10 @@ const Nav = () => {
         <div className="fixed inset-0 z-10 " />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 bg-textBlue">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <a href="#" className="-m-1.5 p-1.5 flex items-center">
               <span className="sr-only">Genimea</span>
-              <img className="h-8 w-auto" src="./logo.png" alt="logo" />
+              <img className="h-8 w-auto" src="./logoWhite.png" alt="logo" />
+              <span className="text-white text-xl font-bold ml-2">Genimea</span>
             </a>
             <button
               type="button"
