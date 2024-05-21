@@ -1,7 +1,13 @@
-import React from "react";
+import Container from "@/components/test/Container";
 
 const page = () => {
-  return <div></div>;
+  return (
+    <main className="relative">
+      <Container>
+        <h1>Test</h1>
+      </Container>
+    </main>
+  );
 };
 
 export default page;
