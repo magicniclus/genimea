@@ -15,6 +15,13 @@ const Hero = () => {
   const searchParams = useSearchParams();
   const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
 
+  useEffect(() => {
+    const lang = searchParams.get("lang");
+    if (lang === "FR" || lang === "EN") {
+      setSelectedLang(lang);
+    }
+  }, [searchParams]);
+
   const contentFr = () => {
     return (
       <div className=" flex items-center md:items-start flex-col">
@@ -27,7 +34,7 @@ const Hero = () => {
           professionnels.
         </p>
         <a
-          href="/test"
+          href={"/test" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")}
           className="px-6 py-2 bg-yellow rounded-md text-white text-2xl mt-7 hover:bg-yellow-600 transition duration-300 ease-in-out text-center md:text-start group flex"
         >
           {" "}
@@ -67,7 +74,7 @@ const Hero = () => {
           tests.
         </p>
         <a
-          href="/test"
+          href={"/test" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")}
           className="px-6 py-2 bg-yellow rounded-md text-white text-2xl mt-7 hover:bg-yellow-600 transition duration-300 ease-in-out text-center md:text-start group flex"
         >
           {" "}
@@ -94,13 +101,6 @@ const Hero = () => {
       </div>
     );
   };
-
-  useEffect(() => {
-    const lang = searchParams.get("lang");
-    if (lang === "FR" || lang === "EN") {
-      setSelectedLang(lang);
-    }
-  }, [searchParams]);
 
   return (
     <section className="w-full relative flex justify-center md:h-[680px] items-center flex-col">
