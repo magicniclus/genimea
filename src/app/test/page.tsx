@@ -44,7 +44,7 @@ const Page = () => {
         <div className="w-full flex justify-end mt-5">
           <button
             type="button"
-            className="py-1 px-4 bg-textBlue text-white rounded-lg shadow-md"
+            className="py-1 px-4 bg-textBlue text-white rounded-lg shadow-md md:hidden block"
             onClick={() => setStep(step + 1)}
           >
             {step === totalStep ? "Soumettre" : "Suivant"}
@@ -62,7 +62,7 @@ const Page = () => {
         <div className="w-full flex justify-end mt-5">
           <button
             type="button"
-            className="py-1 px-4 bg-textBlue text-white rounded-lg shadow-md"
+            className="py-1 px-4 bg-textBlue text-white rounded-lg shadow-md md:hidden block"
             onClick={() => setStep(step + 1)}
           >
             {step === totalStep ? "Submit" : "Next"}
