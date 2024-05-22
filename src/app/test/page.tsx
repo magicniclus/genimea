@@ -31,50 +31,6 @@ const Page = () => {
   const [step, setStep] = useState(1);
   const [totalStep, setTotalStep] = useState(20);
   const [remainingTime, setRemainingTime] = useState(20 * 60);
-  const [reponseValue, setReponseValue] = useState<{
-    [key: string]: Question;
-  }>({
-    question1: {
-      img: "/images/test/question1/Question 1.png",
-      options: [
-        "/images/test/question1/option1.png",
-        "/images/test/question1/option2.png",
-        "/images/test/question1/option3.png",
-        "/images/test/question1/option4.png",
-      ],
-      answer: 1,
-    },
-    question2: {
-      img: "/images/test/question2/question2.png",
-      options: [
-        "/images/test/question2/option1.png",
-        "/images/test/question2/option2.png",
-        "/images/test/question2/option3.png",
-        "/images/test/question2/option4.png",
-      ],
-      answer: 1,
-    },
-    question3: {
-      img: "/images/test/question3/question3.png",
-      options: [
-        "/images/test/question3/option1.png",
-        "/images/test/question3/option2.png",
-        "/images/test/question3/option3.png",
-        "/images/test/question3/option4.png",
-      ],
-      answer: 1,
-    },
-    question4: {
-      img: "/images/test/question4/question4.png",
-      options: [
-        "/images/test/question4/option1.png",
-        "/images/test/question4/option2.png",
-        "/images/test/question4/option3.png",
-        "/images/test/question4/option4.png",
-      ],
-      answer: 1,
-    },
-  });
 
   const handleTimeChange = (newTime: number) => {
     setRemainingTime(newTime);
@@ -83,8 +39,8 @@ const Page = () => {
   const contentFr = () => {
     return (
       <Container>
-        <h1 className="font-bold text-slate-700">TEST QI</h1>
-        <ContainerTest></ContainerTest>
+        {/* <h1 className="font-bold text-slate-700">TEST QI</h1> */}
+        <ContainerTest step={step} setStep={setStep}></ContainerTest>
         <div className="w-full flex justify-end mt-5">
           <button
             type="button"
@@ -101,8 +57,8 @@ const Page = () => {
   const contentEn = () => {
     return (
       <Container>
-        <h1 className="font-bold text-slate-700">IQ TEST</h1>
-        <ContainerTest></ContainerTest>
+        {/* <h1 className="font-bold text-slate-700">IQ TEST</h1> */}
+        <ContainerTest step={step} setStep={setStep}></ContainerTest>
         <div className="w-full flex justify-end mt-5">
           <button
             type="button"
