@@ -87,7 +87,7 @@ const ContainerTest: React.FC<ContainerTestProps> = ({ step, setStep }) => {
           {response.map((_, idx) => (
             <div
               key={idx}
-              className="p-3 shadow-md bg-white rounded-md group min-w-[30%] h-20 mt-3 hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer flex justify-center items-center hover:bg-backgroundBlue/50"
+              className={`p-3 shadow-md bg-white rounded-md group min-w-[30%] h-20 mt-3 hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer flex justify-center items-center hover:bg-backgroundBlue/50`}
               onClick={handleStepClick.bind(null, idx)}
             >
               <img
