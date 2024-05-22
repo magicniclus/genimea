@@ -175,7 +175,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-slate-100">
       {selectedLang === "FR" ? contentFr() : contentEn()}
     </div>
   );

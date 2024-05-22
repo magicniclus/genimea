@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Nav from "@/components/Nav";
 import PointsImportants from "@/components/PointsImportants";
-import Pricing from "@/components/Pricing";
 import Stats from "@/components/Stats";
 
 export default function Home() {
@@ -56,11 +55,11 @@ export default function Home() {
           <Cards />
           {/* <Header /> */}
           <PointsImportants />
-          <FAQ />
           <Stats />
           <Certificat />
           {/* <PolarChart /> */}
-          <Pricing />
+          {/* <Pricing /> */}
+          <FAQ />
         </div>
       </main>
       <Footer />

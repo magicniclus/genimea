@@ -9,12 +9,12 @@ const Timer = ({
 }: {
   onTimeChange: (newTime: number) => void;
 }) => {
-  const [time, setTime] = useState(20 * 60); // 20 minutes in seconds
+  const [time, setTime] = useState(0); // Start at 0 seconds
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTime((prevTime) => {
-        const newTime = prevTime > 0 ? prevTime - 1 : 0;
+        const newTime = prevTime + 1; // Increment the time by 1 second
         onTimeChange(newTime); // Pass the new time to the parent
         return newTime;
       });
@@ -35,11 +35,9 @@ const Timer = ({
         <div className="-m-1.5 p-1.5 flex items-center">
           <span className="sr-only">Genimea</span>
           <img className="h-8 w-auto" src="./logo.png" alt="logo" />
-          <span className="text-backgroundBlue text-xl font-bold ml-1">
-            Genimea
-          </span>
+          <span className="text-slate-700 text-xl font-bold ml-1">Genimea</span>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center px-2 py-0.5 rounded-full bg-backgroundBlue/50">
           <ClockIcon className="h-5 w-5 text-slate-700 mr-1" />
           <p className="text-lg text-slate-700">{formatTime(time)}</p>
         </div>
