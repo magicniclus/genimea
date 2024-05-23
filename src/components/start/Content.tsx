@@ -66,7 +66,7 @@ const Content = () => {
         </div>
         <ul className="text-slate-500">
           <li className="flex mt-7">
-            <CheckIcon className="w-5 h-auto text-textBlue mr-2" /> will get 20
+            <CheckIcon className="w-5 h-auto text-textBlue mr-2" /> Will get 20
             questions with growing difficulty
           </li>
           <li className="flex mt-3">
@@ -74,7 +74,7 @@ const Content = () => {
             right answer out of the 6 options
           </li>
           <li className="flex mt-3">
-            <CheckIcon className="w-5 h-auto text-textBlue mr-2" /> can skip the
+            <CheckIcon className="w-5 h-auto text-textBlue mr-2" /> Can skip the
             question and return back later
           </li>
         </ul>
