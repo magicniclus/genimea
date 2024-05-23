@@ -67,6 +67,10 @@ const Page = () => {
     setRemainingTime(newTime);
   };
 
+  const allResponsesFilled = () => {
+    return Object.values(addResponse).every((value) => value !== null);
+  };
+
   const contentFr = () => {
     return (
       <Container>
@@ -102,7 +106,7 @@ const Page = () => {
         )}
 
         <div className="flex w-full md:justify-end justify-center">
-          {step === 20 && (
+          {step === 20 && allResponsesFilled() && (
             <div className="flex flex-col  md:w-1/2 w-full mt-7 md:mt-0">
               <button
                 className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out text-center"
@@ -160,7 +164,7 @@ const Page = () => {
           </div>
         )}
         <div className="flex w-full md:justify-end justify-center">
-          {step === 20 && (
+          {step === 20 && allResponsesFilled() && (
             <div className="flex flex-col md:w-1/2 w-full mt-7 md:mt-0">
               <button
                 className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out text-center"
