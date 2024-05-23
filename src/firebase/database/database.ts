@@ -7,7 +7,8 @@ const addProspect = async (
   try {
     const currentDate = new Date();
     const id = currentDate.toISOString().split("T")[0]; // Format YYYY-MM-DD
-    await set(ref(database, `prospect/${id}`), prospectData);
+    const refPath = `prospect/${id}/${Date.now()}`; // Use a unique timestamp for each entry
+    await set(ref(database, refPath), prospectData);
     console.log("Prospect added successfully");
   } catch (error) {
     console.error("Error adding prospect: ", error);
