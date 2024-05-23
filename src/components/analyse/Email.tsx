@@ -40,19 +40,25 @@ const Email = () => {
     setIsEmailValid(emailRegex.test(email));
   };
 
+  // Inside the useEffect for state changes
   useEffect(() => {
     console.log(state);
-    if (state) {
+    if (!allResponsesFilled()) {
       router.push("/start");
     }
   }, [state]);
 
+  // Helper function
+  const allResponsesFilled = () => {
+    return Object.values(state).every((value) => value !== null);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!state) {
+    if (!allResponsesFilled()) {
       router.push("/start");
-    }
-    if (isEmailValid && state) {
+      return;
+    } else if (isEmailValid) {
       const elements = { email: updateEmail, reponses: state };
       await addProspect(elements);
       dispatch(setEmail(updateEmail));
