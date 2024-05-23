@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import addProspect from "@/firebase/database/database";
 import { setEmail } from "@/redux/addProspect";
+import { RootState } from "@/redux/store";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Define the types for the languages and content
 type Language = "FR" | "EN";
@@ -16,6 +18,10 @@ const Email = () => {
   const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
   const [updateEmail, setUpdateEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+
+  const state = useSelector(
+    (state: RootState) => state.admin.prospect.reponses
+  );
 
   useEffect(() => {
     const lang = searchParams.get("lang");
@@ -36,7 +42,9 @@ const Email = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isEmailValid) {
-      await dispatch(setEmail(updateEmail));
+      const elements = { email: updateEmail, reponses: state };
+      await addProspect(elements);
+      dispatch(setEmail(updateEmail));
       router.push("/test/resultats");
     }
   };
