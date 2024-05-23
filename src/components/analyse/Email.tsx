@@ -89,7 +89,9 @@ const Email = () => {
             type="submit"
             disabled={!isEmailValid}
             className={`px-4 py-2 text-lg text-white cursor-pointer rounded-md w-max mt-5 transition duration-300 ease-in-out ${
-              isEmailValid ? "bg-textBlue hover:bg-yellow-600" : "bg-gray-400"
+              isEmailValid
+                ? "bg-textBlue hover:bg-textBlue/70"
+                : "bg-textBlue/70"
             }`}
           >
             Continuer
@@ -128,7 +130,9 @@ const Email = () => {
             type="submit"
             disabled={!isEmailValid}
             className={`px-4 py-2 text-lg text-white cursor-pointer rounded-md w-max mt-5 transition duration-300 ease-in-out ${
-              isEmailValid ? "bg-textBlue hover:bg-yellow-600" : "bg-gray-400"
+              isEmailValid
+                ? "bg-textBlue hover:bg-textBlue/70"
+                : "bg-textBlue/70"
             }`}
           >
             Continue
