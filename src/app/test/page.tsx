@@ -94,21 +94,24 @@ const Page = () => {
             </button>
           </div>
         )}
-        {step === 20 && (
-          <div className="flex flex-col  md:w-1/2 w-full mt-7 md:mt-0">
-            <button
-              type="button"
-              className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out"
-              onClick={() => console.log(addResponse)}
-            >
-              VOIR MON RESULTAT
-            </button>
-            <p className="text-slate-400 text-xs mt-3">
-              Voulez-vous confirmer vos réponses ? Vous ne pourrez plus les
-              modifier après validation.
-            </p>
-          </div>
-        )}
+
+        <div className="flex w-full md:justify-end justify-center">
+          {step === 20 && (
+            <div className="flex flex-col  md:w-1/2 w-full mt-7 md:mt-0">
+              <button
+                type="button"
+                className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out"
+                onClick={() => console.log(addResponse)}
+              >
+                VOIR MON RESULTAT
+              </button>
+              <p className="text-slate-400 text-xs mt-3">
+                Voulez-vous confirmer vos réponses ? Vous ne pourrez plus les
+                modifier après validation.
+              </p>
+            </div>
+          )}
+        </div>
       </Container>
     );
   };
@@ -146,21 +149,23 @@ const Page = () => {
             </button>
           </div>
         )}
-        {step === 20 && (
-          <div className="flex flex-col  md:w-1/2 w-full mt-7 md:mt-0">
-            <button
-              type="button"
-              className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out"
-              onClick={() => console.log(addResponse)}
-            >
-              GET MY RESULT
-            </button>
-            <p className="text-slate-400 text-xs mt-3">
-              Do you want to confirm your answers? You will not be able to edit
-              them after validation.
-            </p>
-          </div>
-        )}
+        <div className="flex w-full md:justify-end justify-center">
+          {step === 20 && (
+            <div className="flex flex-col md:w-1/2 w-full mt-7 md:mt-0">
+              <button
+                type="button"
+                className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out"
+                onClick={() => console.log(addResponse)}
+              >
+                GET MY RESULT
+              </button>
+              <p className="text-slate-400 text-xs mt-3">
+                Do you want to confirm your answers? You will not be able to
+                edit them after validation.
+              </p>
+            </div>
+          )}
+        </div>
       </Container>
     );
   };
