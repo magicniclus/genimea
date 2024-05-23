@@ -94,8 +94,6 @@ const ContainerTest: React.FC<ContainerTestProps> = ({
                 className={`w-4/6 h-auto group-hover:opacity-100 transition-all duration-300 ease-in-out ${
                   translateIdxIntoLetter(idx) === addResponse[step]
                     ? "opacity-100"
-                    : translateIdxIntoLetter(idx) === addResponse[step - 1]
-                    ? "opacity-100"
                     : "opacity-60"
                 }`}
               />
