@@ -5,8 +5,10 @@ import ContainerTest from "@/components/test/ContainerTest";
 import StepBar from "@/components/test/StepBar";
 import StepCards from "@/components/test/StepCards";
 import Timer from "@/components/test/Timer";
-import { useSearchParams } from "next/navigation";
+import { setReponses } from "@/redux/addProspect";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 // Define the types for the languages and content
 type Language = "FR" | "EN";
@@ -18,6 +20,10 @@ interface Question {
 }
 
 const Page = () => {
+  const router = useRouter();
+
+  const dispatch = useDispatch();
+
   const searchParams = useSearchParams();
   const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
 
@@ -98,13 +104,12 @@ const Page = () => {
         <div className="flex w-full md:justify-end justify-center">
           {step === 20 && (
             <div className="flex flex-col  md:w-1/2 w-full mt-7 md:mt-0">
-              <a
-                href={`/test/analyse?lang=${selectedLang}`}
+              <button
                 className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out text-center"
-                onClick={() => console.log(addResponse)}
+                onClick={handleSubmit}
               >
                 VOIR MON RESULTAT
-              </a>
+              </button>
               <p className="text-slate-400 text-xs mt-3">
                 Voulez-vous confirmer vos réponses ? Vous ne pourrez plus les
                 modifier après validation.
@@ -114,6 +119,11 @@ const Page = () => {
         </div>
       </Container>
     );
+  };
+
+  const handleSubmit = async () => {
+    dispatch(setReponses(addResponse));
+    router.push("/test/analyse");
   };
 
   const contentEn = () => {
@@ -152,13 +162,12 @@ const Page = () => {
         <div className="flex w-full md:justify-end justify-center">
           {step === 20 && (
             <div className="flex flex-col md:w-1/2 w-full mt-7 md:mt-0">
-              <a
-                href={`/test/analyse?lang=${selectedLang}`}
+              <button
                 className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out text-center"
-                onClick={() => console.log(addResponse)}
+                onClick={handleSubmit}
               >
                 GET MY RESULT
-              </a>
+              </button>
               <p className="text-slate-400 text-xs mt-3">
                 Do you want to confirm your answers? You will not be able to
                 edit them after validation.
