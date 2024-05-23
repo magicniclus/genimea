@@ -98,13 +98,13 @@ const Page = () => {
         <div className="flex w-full md:justify-end justify-center">
           {step === 20 && (
             <div className="flex flex-col  md:w-1/2 w-full mt-7 md:mt-0">
-              <button
-                type="button"
-                className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out"
+              <a
+                href={`/test/analyse?lang=${selectedLang}`}
+                className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out text-center"
                 onClick={() => console.log(addResponse)}
               >
                 VOIR MON RESULTAT
-              </button>
+              </a>
               <p className="text-slate-400 text-xs mt-3">
                 Voulez-vous confirmer vos réponses ? Vous ne pourrez plus les
                 modifier après validation.
@@ -152,13 +152,13 @@ const Page = () => {
         <div className="flex w-full md:justify-end justify-center">
           {step === 20 && (
             <div className="flex flex-col md:w-1/2 w-full mt-7 md:mt-0">
-              <button
-                type="button"
-                className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out"
+              <a
+                href={`/test/analyse?lang=${selectedLang}`}
+                className="py-2 px-4 bg-yellow text-white text-lg rounded-lg shadow-md block hover:shadow-lg transition-all duration-300 ease-in-out text-center"
                 onClick={() => console.log(addResponse)}
               >
                 GET MY RESULT
-              </button>
+              </a>
               <p className="text-slate-400 text-xs mt-3">
                 Do you want to confirm your answers? You will not be able to
                 edit them after validation.
