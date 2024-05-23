@@ -1,15 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { CheckIcon } from "@heroicons/react/20/solid";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // Define the types for the languages and content
 type Language = "FR" | "EN";
 
 const Content = () => {
+  const router = useRouter();
+
   const searchParams = useSearchParams();
   const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
   const [pourcentage, setPourcentage] = useState(0);
@@ -22,12 +25,16 @@ const Content = () => {
   }, [searchParams]);
 
   useEffect(() => {
+    if (pourcentage === 100) {
+      router.push(`/test/analyse/email?lang=${selectedLang}`);
+    }
+
     const updatePourcentage = () => {
       if (pourcentage < 100) {
         setTimeout(() => {
           const randomIncrement = Math.floor(Math.random() * 11) + 5; // Génère un nombre aléatoire entre 5 et 15
           setPourcentage((prev) => Math.min(prev + randomIncrement, 100));
-        }, 3000);
+        }, 1000);
       }
     };
 
