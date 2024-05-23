@@ -84,7 +84,7 @@ const ContainerTest: React.FC<ContainerTestProps> = ({
               className={`p-3 shadow-md rounded-md group min-w-[30%] h-20 mt-3 hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer flex justify-center items-center ${
                 translateIdxIntoLetter(idx) === addResponse[step]
                   ? "bg-backgroundBlue bg-opacity-50"
-                  : "bg-white hover:bg-backgroundBlue/50"
+                  : "bg-white hover:bg-slate-200/50"
               }`}
               onClick={() => handleStepClick(idx)}
             >
