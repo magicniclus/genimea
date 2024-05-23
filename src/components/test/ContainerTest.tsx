@@ -1,50 +1,42 @@
-"use client";
-
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 /* eslint-disable @next/next/no-img-element */
 interface ContainerTestProps {
   step: number;
   setStep: (step: number) => void;
+  addResponse: { [key: number]: string | null };
+  setAddResponse: React.Dispatch<
+    React.SetStateAction<{ [key: number]: string | null }>
+  >;
 }
 
-// Définir le type indexable pour addResponse
-interface ResponseMap {
-  [key: number]: string | null;
-}
+// Define the types for the languages and content
+type Language = "FR" | "EN";
 
-const ContainerTest: React.FC<ContainerTestProps> = ({ step, setStep }) => {
+const ContainerTest: React.FC<ContainerTestProps> = ({
+  step,
+  setStep,
+  addResponse,
+  setAddResponse,
+}) => {
+  const searchParams = useSearchParams();
+  const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
+
+  useEffect(() => {
+    const lang = searchParams.get("lang");
+    if (lang === "FR" || lang === "EN") {
+      setSelectedLang(lang);
+    }
+  }, [searchParams]);
+
   const response = Array.from({ length: 6 }, (_, index) => index);
-  const question = Array.from({ length: 6 }, (_, index) => index);
-
-  const [addResponse, setAddResponse] = useState<{
-    [key: number]: string | null;
-  }>({
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
-    7: null,
-    8: null,
-    9: null,
-    10: null,
-    11: null,
-    12: null,
-    13: null,
-    14: null,
-    15: null,
-    16: null,
-    17: null,
-    18: null,
-    19: null,
-    20: null,
-  });
 
   const handleStepClick = (idx: number) => {
     setAddResponse({ ...addResponse, [step]: translateIdxIntoLetter(idx) });
-    setStep(step + 1);
+    if (step < 20) {
+      setStep(step + 1);
+    }
   };
 
   const translateIdxIntoLetter = (idx: number) => {
@@ -81,19 +73,31 @@ const ContainerTest: React.FC<ContainerTestProps> = ({ step, setStep }) => {
       </div>
       <div className="w-full h-[100%] md:w-6/12 flex flex-col items-center">
         <h2 className="text-slate-700 mb-5 mt-7 md:mt-0">
-          Choose your answer:
+          {selectedLang === "FR"
+            ? "Choisissez votre réponse:"
+            : "Choose your answer:"}
         </h2>
         <div className="w-full flex flex-wrap justify-between md:justify-around h-[100%]">
           {response.map((_, idx) => (
             <div
               key={idx}
-              className={`p-3 shadow-md bg-white rounded-md group min-w-[30%] h-20 mt-3 hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer flex justify-center items-center hover:bg-backgroundBlue/50`}
-              onClick={handleStepClick.bind(null, idx)}
+              className={`p-3 shadow-md rounded-md group min-w-[30%] h-20 mt-3 hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer flex justify-center items-center ${
+                translateIdxIntoLetter(idx) === addResponse[step]
+                  ? "bg-backgroundBlue bg-opacity-50"
+                  : "bg-white hover:bg-backgroundBlue/50"
+              }`}
+              onClick={() => handleStepClick(idx)}
             >
               <img
                 src={`/images/test/question${step}_answer${idx + 1}.svg`}
                 alt="response"
-                className="w-4/6 h-auto opacity-60 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+                className={`w-4/6 h-auto group-hover:opacity-100 transition-all duration-300 ease-in-out ${
+                  translateIdxIntoLetter(idx) === addResponse[step]
+                    ? "opacity-100"
+                    : translateIdxIntoLetter(idx) === addResponse[step - 1]
+                    ? "opacity-100"
+                    : "opacity-60"
+                }`}
               />
             </div>
           ))}
