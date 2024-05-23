@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -39,13 +40,23 @@ const Email = () => {
     setIsEmailValid(emailRegex.test(email));
   };
 
+  useEffect(() => {
+    console.log(state);
+    if (state) {
+      router.push("/start");
+    }
+  }, [state]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isEmailValid) {
+    if (!state) {
+      router.push("/start");
+    }
+    if (isEmailValid && state) {
       const elements = { email: updateEmail, reponses: state };
       await addProspect(elements);
       dispatch(setEmail(updateEmail));
-      router.push("/test/resultats");
+      router.push("/resultats");
     }
   };
 
