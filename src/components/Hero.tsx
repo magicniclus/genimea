@@ -34,7 +34,7 @@ const Hero = () => {
           professionnels.
         </p>
         <a
-          href={"/test" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")}
+          href={"/start" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")}
           className="px-6 py-2 bg-yellow rounded-md text-white text-2xl mt-7 hover:bg-yellow-600 transition duration-300 ease-in-out text-center md:text-start group flex"
         >
           {" "}
@@ -74,7 +74,7 @@ const Hero = () => {
           tests.
         </p>
         <a
-          href={"/test" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")}
+          href={"/start" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")}
           className="px-6 py-2 bg-yellow rounded-md text-white text-2xl mt-7 hover:bg-yellow-600 transition duration-300 ease-in-out text-center md:text-start group flex"
         >
           {" "}
