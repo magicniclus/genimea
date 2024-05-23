@@ -85,7 +85,7 @@ const Avis = () => {
             <span className="font-semibold text-slate-700">210</span> avis
           </p>
         </div>
-        <div className="max-w-5xl w-full mx-auto rounded-xl flex flex-col items-center p-4 mt-3">
+        <div className="max-w-5xl w-full mx-auto rounded-xl flex flex-col items-center p-4 mt-3 px-5">
           <Carousel className="w-full max-w-5xl">
             <CarouselContent className="-ml-1">
               {reviews.map((review, index) => (
@@ -125,7 +125,7 @@ const Avis = () => {
               <div className="p-1 rounded-full bg-slate-700 flex justify-center items-center">
                 <StarIcon className="w-4 h-4 text-white" />
               </div>
-              <p className="font-bold text-slate-700 ml-1">
+              <p className="font-bold text-sm text-slate-700 ml-1">
                 REVIEWWWS<span className="text-xs font-normal">.com</span>
               </p>
             </div>
