@@ -104,7 +104,7 @@ const Hero = () => {
 
   return (
     <section className="w-full relative flex justify-center md:h-[680px] items-center flex-col">
-      <div className="max-w-7xl mx-auto md:bg-white/85 rounded-xl flex md:flex-row flex-col items-center px-2 md:p-24 px-12 py-12">
+      <div className="max-w-6xl mx-auto md:bg-white/85 rounded-xl flex md:flex-row flex-col items-center px-4 md:p-24 px-12 py-12">
         {selectedLang === "FR" ? contentFr() : contentEn()}
         <div className="relative z-5  group">
           <div className="relative mt-14 md:mt-0">
