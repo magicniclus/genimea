@@ -11,14 +11,17 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
 );
 
-const CheckoutForm = () => {
+type CheckoutFormProps = {
+  index: number;
+  email?: string;
+};
+
+const CheckoutForm: React.FC<CheckoutFormProps> = ({ index, email }) => {
   const [testNumber, setTestNumber] = useState(2358);
 
   useEffect(() => {
-    setTimeout(() => {
-      setTestNumber(testNumber + 1);
-    }, 3000);
-  }, [testNumber]);
+    setTestNumber(testNumber + 1);
+  }, [index]);
 
   return (
     <section className="w-full px-1 md:px-6 mt-16 text-slate-700" id="checkout">
@@ -103,7 +106,7 @@ const CheckoutForm = () => {
           </div>
         </div>
         <Elements stripe={stripePromise}>
-          <SubscriptionForm />
+          <SubscriptionForm semail={email} />
         </Elements>
       </div>
     </section>
