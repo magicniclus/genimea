@@ -71,7 +71,7 @@ const Avis = () => {
   const contentFr = () => {
     return (
       <>
-        <div className="flex mx-auto">
+        <div className="flex mx-auto sm:flex-row flex-col items-center">
           <h2 className="font-bold text-slate-700">Excellent</h2>
           <div className="flex ml-2">
             <StarIcon className="w-5 h-5 text-yellow-500" />
