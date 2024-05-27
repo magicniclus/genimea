@@ -1,8 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
+import Avis from "@/components/analyse/Avis";
 import Banner from "@/components/resultat/Banner";
 import Hero from "@/components/resultat/Hero";
+import Resultat from "@/components/resultat/Resultat";
 import CheckoutForm from "@/components/stripe/CheckoutForm";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
@@ -33,7 +37,7 @@ const page = () => {
   return (
     <>
       <header className="w-full">
-        <div className="max-w-5xl mx-auto rounded-xl flex flex-row items-center justify-start p-6 lg:px-8">
+        <div className="max-w-6xl mx-auto rounded-xl flex flex-row items-center justify-start py-6 pt-16 px-4 lg:px-8">
           <div className="-m-1.5 p-1.5 flex items-center">
             <span className="sr-only">Genimea</span>
             <img className="h-8 w-auto" src="/logo.png" alt="logo" />
@@ -47,10 +51,18 @@ const page = () => {
         <Banner />
         <Hero />
         <CheckoutForm />
-        <div>
+        <div className="w-full flex justify-center">
           <InfiniteMovingCards className="mt-20" items={items} />
         </div>
+        <Resultat />
+        <div className="mt-20">
+          <Avis />
+        </div>
+        <div className="mt-20">
+          <FAQ />
+        </div>
       </main>
+      <Footer />
     </>
   );
 };
