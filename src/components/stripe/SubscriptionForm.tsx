@@ -10,14 +10,18 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 
+type SubscriptionFormProps = {
+  semail?: string;
+};
+
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
 );
 
-const SubscriptionForm: React.FC = () => {
+const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(semail || "");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
