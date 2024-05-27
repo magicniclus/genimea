@@ -1,6 +1,6 @@
 const Banner = () => {
   return (
-    <div className="flex items-center gap-x-6 bg-indigo-600 px-6 py-2.5 sm:px-3.5 justify-center">
+    <div className="flex items-center gap-x-6 bg-indigo-600 px-6 py-2.5 sm:px-3.5 justify-center flex-col md:flex-col text-center">
       <a
         href="#checkout"
         className="text-sm leading-6 text-white cursor-pointer"
@@ -14,7 +14,6 @@ const Banner = () => {
           <circle cx={1} cy={1} r={1} />
         </svg>
         Get 85% Discount Today!
-        <span aria-hidden="true">&rarr;</span>
       </a>
     </div>
   );
