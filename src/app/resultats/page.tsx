@@ -1,10 +1,35 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Hero from "@/components/Hero";
+import Banner from "@/components/resultat/Banner";
+import Hero from "@/components/resultat/Hero";
 import CheckoutForm from "@/components/stripe/CheckoutForm";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 const page = () => {
+  const items = [
+    {
+      name: "fox",
+      img: "/icons/fox.svg",
+    },
+    {
+      name: "yahoo",
+      img: "/icons/yahoo.svg",
+    },
+    {
+      name: "Bachart",
+      img: "/icons/Bachart.svg",
+    },
+    {
+      name: "Benzinga",
+      img: "/icons/benzinga.svg",
+    },
+    {
+      name: "MSN",
+      img: "/icons/msn.svg",
+    },
+  ];
+
   return (
     <>
       <header className="w-full">
@@ -19,8 +44,12 @@ const page = () => {
         </div>
       </header>
       <main className="relative w-full">
+        <Banner />
         <Hero />
         <CheckoutForm />
+        <div>
+          <InfiniteMovingCards className="mt-20" items={items} />
+        </div>
       </main>
     </>
   );
