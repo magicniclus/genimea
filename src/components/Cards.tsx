@@ -85,7 +85,7 @@ const Cards = () => {
   };
 
   return (
-    <section className="w-full relative flex justify-center max-w-6xl mx-auto items-center flex-col md:py-20 py-10 px-4 md:px-0">
+    <section className="w-full relative flex justify-center max-w-6xl mx-auto items-center flex-col md:py-20 py-10 px-4">
       {selectedLang === "FR" ? contentFr() : contentEn()}
     </section>
   );
