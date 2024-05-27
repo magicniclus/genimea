@@ -21,7 +21,7 @@ const CheckoutForm = () => {
   }, [testNumber]);
 
   return (
-    <section className="w-full px-1 md:px-6 mt-5 text-slate-700">
+    <section className="w-full px-1 md:px-6 mt-16 text-slate-700" id="checkout">
       <div className="max-w-5xl w-full mx-auto rounded-xl flex flex-col items-center w-full max-w-[550px] p-5 border border-slate-300 shadow-md rounded-md shadow-md">
         <div className="w-full mb-5 flex items-center flex-col">
           <p className="text-sm text-semibold text-slate-500 text-center px-2 py-1 bg-backgroundBlue/50 rounded-full">
