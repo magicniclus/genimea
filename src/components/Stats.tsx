@@ -30,7 +30,7 @@ const Stats = () => {
   const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
   useEffect(() => {
-    const lang = searchParams.get("lang");
+    const lang = searchParams?.get("lang"); // Add null check for searchParams
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
