@@ -62,7 +62,7 @@ const Avis = () => {
   const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
 
   useEffect(() => {
-    const lang = searchParams.get("lang");
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
