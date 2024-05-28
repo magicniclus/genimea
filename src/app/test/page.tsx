@@ -5,7 +5,7 @@ import ContainerTest from "@/components/test/ContainerTest";
 import StepBar from "@/components/test/StepBar";
 import StepCards from "@/components/test/StepCards";
 import Timer from "@/components/test/Timer";
-import { setReponses } from "@/redux/addProspect";
+import { setReponses, setTimer } from "@/redux/addProspect";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -126,7 +126,8 @@ const Page = () => {
   };
 
   const handleSubmit = async () => {
-    dispatch(setReponses(addResponse));
+    await dispatch(setReponses(addResponse));
+    await dispatch(setTimer(remainingTime));
     router.push("/test/analyse" + "?lang=" + selectedLang);
   };
 
