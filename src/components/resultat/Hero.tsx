@@ -9,15 +9,15 @@ import { CheckCircle } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-// Define the types for the languages and content
+// Définir les types pour les langues et le contenu
 type Language = "FR" | "EN";
 
 const Hero = () => {
   const searchParams = useSearchParams();
-  const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
+  const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Par défaut 'FR'
 
   useEffect(() => {
-    const lang = searchParams?.get("lang"); // Add null check for searchParams
+    const lang = searchParams?.get("lang"); // Ajouter une vérification nulle pour searchParams
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
@@ -51,7 +51,7 @@ const Hero = () => {
           <p className="text-md text-gray-500 mt-7 flex items-center">
             <CursorArrowRippleIcon className="h-5 w-5 text-textBlue mr-2 " />
             <span className="font-bold text-textBlue mr-2">37 000 </span> Tests
-            réalisé ces dernières 24h
+            réalisés ces dernières 24h
           </p>
           <p className="text-md text-gray-500 mt-3 md:mt-0 flex items-center">
             <ArrowTrendingUpIcon className="h-5 w-5 text-textBlue mr-2" />
@@ -108,7 +108,7 @@ const Hero = () => {
     <section className="w-full relative flex justify-center md:h-[500px] items-center flex-col px-4 bg-backgroundBlue/10">
       <div className=" mx-auto rounded-xl flex md:flex-row flex-col items-center px-4 md:p-24 px-12 py-12 max-x-5xl">
         {selectedLang === "FR" ? contentFr() : contentEn()}
-        <div className="relative z-5  group">
+        <div className="relative z-5 group">
           <div className="relative mt-14 md:mt-0">
             <div className="p-5 rounded-2xl blur-xl bg-white absolute top-20 -right-5 h-[350px] w-[600px]"></div>
             <img
