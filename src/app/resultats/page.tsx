@@ -216,8 +216,8 @@ const Page = () => {
               Genimea
             </span>
           </div>
-          <div className="">
-            {userEmail && <p className="text-slate-700">Welcome {userEmail}</p>}
+          <div className="md:flex hidden">
+            {userEmail && <p className="text-slate-700">{userEmail}</p>}
           </div>
         </div>
       </header>
