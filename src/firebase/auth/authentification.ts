@@ -1,9 +1,31 @@
 import {
+  createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase.config";
+
+// Function to create a user with email and password
+export const createUserWithEmailPassword = (
+  email: string,
+  password: string
+) => {
+  return new Promise((resolve, reject) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // User created successfully
+        const user = userCredential.user;
+        resolve(user);
+      })
+      .catch((error) => {
+        // An error occurred during user creation
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        reject({ errorCode, errorMessage });
+      });
+  });
+};
 
 // Fonction pour s'authentifier avec l'email et le mot de passe
 export const signInWithEmailPassword = (email: string, password: string) => {
