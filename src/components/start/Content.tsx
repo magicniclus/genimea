@@ -57,25 +57,29 @@ const Content = () => {
   const contentEn = () => {
     return (
       <div className="p-14 bg-white border border-slate-100 shadow-xl rounded-md flex flex-col items-center">
-        <div className="flex items-center ">
-          <img src="/icons/brain.png" className="w-14 h-auto mr-2" />
+        <div className="flex items-center">
+          <img
+            src="/icons/brain.png"
+            className="w-14 h-auto mr-2"
+            alt="Brain icon"
+          />
           <h1 className="text-3xl font-bold text-slate-700">
             Get ready to start the <span className="text-textBlue">IQ</span>{" "}
             test!
           </h1>
         </div>
-        <ul className="text-slate-500">
-          <li className="flex mt-7">
-            <CheckIcon className="w-5 h-auto text-textBlue mr-2" /> Will get 20
-            questions with growing difficulty
+        <ul className="text-slate-500 mt-7">
+          <li className="flex mt-3">
+            <CheckIcon className="w-5 h-auto text-textBlue mr-2" />
+            You will get 20 questions with increasing difficulty
           </li>
           <li className="flex mt-3">
-            <CheckIcon className="w-5 h-auto text-textBlue mr-2" /> Select the
-            right answer out of the 6 options
+            <CheckIcon className="w-5 h-auto text-textBlue mr-2" />
+            Choose the correct answer from 6 options
           </li>
           <li className="flex mt-3">
-            <CheckIcon className="w-5 h-auto text-textBlue mr-2" /> Can skip the
-            question and return back later
+            <CheckIcon className="w-5 h-auto text-textBlue mr-2" />
+            You can skip questions and return to them later
           </li>
         </ul>
         <a
