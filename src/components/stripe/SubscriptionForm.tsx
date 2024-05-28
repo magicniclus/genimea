@@ -55,7 +55,18 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const generateRandomPassword = (length: number) => {
+    const charset =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+    let password = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
+    }
+    return password;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
@@ -103,18 +114,24 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
       const subscription = await response.json();
       console.log("Subscription successful!", subscription);
 
+      // Generate random password
+      const randomPassword = generateRandomPassword(12);
+      console.log("Generated password:", randomPassword);
+
       // Additional logic for Firebase operations
       if (userEmail && userId) {
-        const prospectPath = `prospect/${userId}`;
         const clientPath = `client/${userId}`;
 
         try {
-          await addUserToNewPath({ user }, clientPath);
+          await addUserToNewPath(
+            { user, password: randomPassword },
+            clientPath
+          );
           console.log("User added to client path:", clientPath);
-          await removeUserFromPath(prospectPath);
-          console.log("User removed from prospect path:", prospectPath);
+          await removeUserFromPath(`prospect/${userId}`);
+          console.log("User removed from prospect path:", `prospect/${userId}`);
 
-          dispatch(setUserId(clientPath)); // Save the new client path as the userId
+          dispatch(setUserId(clientPath));
           router.push(
             "/dashboard" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")
           );
@@ -124,8 +141,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
       } else {
         router.push("/" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR"));
       }
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error) {
       console.error("Error:", error);
     }
 
