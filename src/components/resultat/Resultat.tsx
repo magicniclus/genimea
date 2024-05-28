@@ -96,7 +96,7 @@ const Resultat = ({ index, userDynamic }: ResultatProps) => {
         }
       `}</style>
       <section style={{ zIndex: 200 }}>
-        <div className="w-screen bg-slate-100 text-slate-700 fixed top-0 right-0 py-3 z-50">
+        <div className="w-screen bg-slate-100 text-slate-700 fixed top-0 right-0 py-3 z-50 shadow-md">
           <div className="max-w-6xl mx-auto flex items-center justify-between px-4 w-full">
             {selectedLang === "FR" ? contentFr() : contentEn()}
           </div>
