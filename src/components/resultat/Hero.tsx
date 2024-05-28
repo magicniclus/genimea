@@ -65,12 +65,12 @@ const Hero = () => {
 
   const contentEn = () => {
     return (
-      <div className=" flex items-center md:items-start flex-col">
+      <div className="flex items-center md:items-start flex-col">
         <h1 className="text-4xl font-bold text-text text-center md:text-start max-w-[300px]">
-          Your <span className="text-textBlue">IQ score</span> is ready!
+          Your <span className="text-textBlue">IQ Score</span> is Ready!
         </h1>
         <p className="text-lg font-semibold text-text mt-3 max-w-[70%] text-center md:text-start">
-          Discover your intellectual potential through our professional IQ
+          Uncover your intellectual potential with our expertly designed IQ
           tests.
         </p>
         <a
@@ -78,7 +78,7 @@ const Hero = () => {
           className="px-6 py-2 bg-yellow rounded-md text-white text-2xl mt-7 hover:bg-yellow-600 transition duration-300 ease-in-out text-center md:text-start group flex"
         >
           {" "}
-          Get My IQ Score
+          Get Your IQ Score Now
           <div
             aria-hidden="true"
             className="group-hover:translate-x-3 transition duration-150 ease-in-out ml-2"
@@ -86,18 +86,18 @@ const Hero = () => {
             &rarr;
           </div>
         </a>
-        <div className="flex flex-col items-start">
-          <p className="text-md text-gray-500 mt-7 text-start flex items-center">
+        <div className="flex flex-col items-start mt-7">
+          <p className="text-md text-gray-500 text-start flex items-center">
             <CheckCircle className="h-5 w-5 text-textBlue mr-2" />
-            Find out how intelligent you are
+            Discover your true intelligence level
           </p>
           <p className="text-md text-gray-500 text-start mt-3 md:mt-0 flex items-center">
             <CheckCircle className="h-5 w-5 text-textBlue mr-2" />
-            Learn where you stand compared to others
+            See how you compare to others
           </p>
           <p className="text-md text-gray-500 text-start mt-3 md:mt-0 flex items-center">
             <CheckCircle className="h-5 w-5 text-textBlue mr-2" />
-            Explore your strengths and weaknesses
+            Understand your strengths and areas for improvement
           </p>
         </div>
       </div>
