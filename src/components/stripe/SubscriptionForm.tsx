@@ -1,5 +1,6 @@
 "use client";
 
+import { createUserWithEmailPassword } from "@/firebase/auth/authentification";
 import {
   addUserToNewPath,
   removeUserFromPath,
@@ -66,7 +67,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
     return password;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
@@ -118,15 +119,19 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
       const randomPassword = generateRandomPassword(12);
       console.log("Generated password:", randomPassword);
 
+      // Create user in Firebase Authentication
+      const firebaseUser = await createUserWithEmailPassword(
+        email,
+        randomPassword
+      );
+      console.log("User created in Firebase Auth:", firebaseUser);
+
       // Additional logic for Firebase operations
-      if (userEmail && userId) {
-        const clientPath = `client/${userId}`;
+      if (userEmail) {
+        const clientPath = `client/${(firebaseUser as any).uid}`;
 
         try {
-          await addUserToNewPath(
-            { user, password: randomPassword },
-            clientPath
-          );
+          await addUserToNewPath(user, clientPath);
           console.log("User added to client path:", clientPath);
           await removeUserFromPath(`prospect/${userId}`);
           console.log("User removed from prospect path:", `prospect/${userId}`);
@@ -141,7 +146,8 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
       } else {
         router.push("/" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR"));
       }
-    } catch (error) {
+    } catch (error: any) {
+      setError(error.message);
       console.error("Error:", error);
     }
 
