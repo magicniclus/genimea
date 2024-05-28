@@ -36,7 +36,7 @@ export const removeUserFromPath = async (path: string): Promise<void> => {
 export const addUserToNewPath = async (
   userData: Record<string, any>,
   newPath: string
-): Promise<void> => {
+) => {
   try {
     await set(ref(database, newPath), userData);
     console.log("User added successfully to new path:", newPath);
