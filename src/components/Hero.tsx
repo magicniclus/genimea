@@ -64,7 +64,7 @@ const Hero = () => {
 
   const contentEn = () => {
     return (
-      <div className=" flex items-center md:items-start flex-col">
+      <div className="flex items-center md:items-start flex-col">
         <h1 className="text-4xl font-bold text-text text-center md:text-start max-w-[300px]">
           Assess Your <span className="text-textBlue">IQ</span> with{" "}
           <span className="text-textBlue">Genimea</span>
@@ -77,8 +77,7 @@ const Hero = () => {
           href={"/start" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")}
           className="px-6 py-2 bg-yellow rounded-md text-white text-2xl mt-7 hover:bg-yellow-600 transition duration-300 ease-in-out text-center md:text-start group flex"
         >
-          {" "}
-          Start the test{" "}
+          Start the Test
           <div
             aria-hidden="true"
             className="group-hover:translate-x-3 transition duration-150 ease-in-out ml-2"
@@ -86,16 +85,16 @@ const Hero = () => {
             &rarr;
           </div>
         </a>
-        <div className="flex flex-col  md:items-start items-center">
-          <p className="text-md text-gray-500 mt-7 text-start flex items-center md:flex-row flex-col">
+        <div className="flex flex-col md:items-start items-center">
+          <p className="text-md text-gray-500 mt-7 flex items-center">
             <CursorArrowRippleIcon className="h-5 w-5 text-textBlue mr-2" />
-            <span className="font-bold text-textBlue mr-2">37 000 </span> tests
+            <span className="font-bold text-textBlue mr-2">37,000</span> tests
             completed in the last 24 hours
           </p>
-          <p className="text-md text-gray-500 text-start mt-3 md:mt-0 flex items-center md:flex-row flex-col">
+          <p className="text-md text-gray-500 mt-3 flex items-center">
             <ArrowTrendingUpIcon className="h-5 w-5 text-textBlue mr-2" />
-            <span className="font-bold text-textBlue mr-2">104 </span> Average
-            IQ score
+            <span className="font-bold text-textBlue mr-2">104</span> Average IQ
+            score
           </p>
         </div>
       </div>
