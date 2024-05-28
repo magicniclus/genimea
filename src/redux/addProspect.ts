@@ -9,7 +9,7 @@ interface ProspectState {
     [key: number]: string | null;
   };
   timer: number;
-  userId: number | null;
+  userId: string | null;
   userIQ: number;
 }
 
