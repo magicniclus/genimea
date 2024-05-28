@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 
-import addProspect from "@/firebase/database/database";
+import { addProspect } from "@/firebase/database/database";
 import { setEmail, setUserIQ, setUserId } from "@/redux/addProspect";
 import { RootState } from "@/redux/store";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -47,7 +47,7 @@ const Email = () => {
 
   // Inside the useEffect for state changes
   useEffect(() => {
-    console.log(reponses);
+    // console.log(reponses);
     if (!allResponsesFilled()) {
       router.push("/start");
     }
@@ -91,6 +91,7 @@ const Email = () => {
       };
       try {
         await addProspect(elements).then((id) => {
+          // Explicitly define the type of 'id' as string
           if (id) {
             dispatch(setUserId(id));
             router.push(
