@@ -1,9 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
+
 import addProspect from "@/firebase/database/database";
-import { setEmail } from "@/redux/addProspect";
+import { setEmail, setUserIQ, setUserId } from "@/redux/addProspect";
 import { RootState } from "@/redux/store";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -20,9 +21,13 @@ const Email = () => {
   const [updateEmail, setUpdateEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
 
-  const state = useSelector(
+  const reponses = useSelector(
     (state: RootState) => state.admin.prospect.reponses
   );
+  const initialReponses = useSelector(
+    (state: RootState) => state.admin.prospect.initialReponses
+  );
+  const timer = useSelector((state: RootState) => state.admin.prospect.timer);
 
   useEffect(() => {
     const lang = searchParams?.get("lang");
@@ -42,15 +47,30 @@ const Email = () => {
 
   // Inside the useEffect for state changes
   useEffect(() => {
-    console.log(state);
+    console.log(reponses);
     if (!allResponsesFilled()) {
       router.push("/start");
     }
-  }, [state]);
+  }, [reponses]);
 
   // Helper function
   const allResponsesFilled = () => {
-    return Object.values(state).every((value) => value !== null);
+    return Object.values(reponses).every((value) => value !== null);
+  };
+
+  const calculateIQ = (
+    reponses: { [key: number]: string | null },
+    initialReponses: { [key: number]: string }
+  ): number => {
+    let correctAnswers = 0;
+    for (const key in reponses) {
+      if (reponses[key] === initialReponses[key]) {
+        correctAnswers++;
+      }
+    }
+    // Example calculation, assuming 100 is the average IQ and 5 points per correct answer
+    const iq = 100 + (correctAnswers - 10) * 5;
+    return iq;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -59,9 +79,30 @@ const Email = () => {
       router.push("/start");
       return;
     } else if (isEmailValid) {
-      const elements = { email: updateEmail, reponses: state };
-      await addProspect(elements);
+      const userIQ = calculateIQ(reponses, initialReponses);
       dispatch(setEmail(updateEmail));
+      dispatch(setUserIQ(userIQ));
+
+      const elements = {
+        email: updateEmail,
+        reponses,
+        userIQ,
+        timer,
+      };
+      try {
+        await addProspect(elements).then((id) => {
+          if (id) {
+            dispatch(setUserId(id));
+            router.push(
+              "/resultats" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")
+            );
+          } else {
+            console.error("Failed to retrieve ID");
+          }
+        });
+      } catch (error) {
+        console.error("Error adding prospect: ", error);
+      }
       router.push(
         "/resultats" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")
       );
@@ -113,7 +154,7 @@ const Email = () => {
     return (
       <>
         <h1 className="text-3xl font-bold text-slate-700">
-          Discover Your <span className="text-textBlue">QI</span> Potential!!
+          Discover Your <span className="text-textBlue">IQ</span> Potential!
         </h1>
         <p className="text-slate-500 text-sm max-w-[500px] text-center mt-5">
           Enter your email to gain exclusive access to our detailed IQ
