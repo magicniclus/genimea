@@ -3,12 +3,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface ProspectState {
   email: string;
   initialReponses: {
-    [key: number]: string | null;
+    [key: number]: string;
   };
   reponses: {
     [key: number]: string | null;
   };
   timer: number;
+  userId: number | null;
+  userIQ: number;
 }
 
 const initialState: { prospect: ProspectState } = {
@@ -59,6 +61,8 @@ const initialState: { prospect: ProspectState } = {
       20: null,
     },
     timer: 0,
+    userId: null,
+    userIQ: 0,
   },
 };
 
@@ -78,9 +82,25 @@ const adminSlice = createSlice({
     ) => {
       state.prospect.reponses = action.payload;
     },
+    setTimer: (state, action: PayloadAction<number>) => {
+      state.prospect.timer = action.payload;
+    },
+    setUserId: (state, action: PayloadAction<string>) => {
+      state.prospect.userId = action.payload;
+    },
+    setUserIQ: (state, action: PayloadAction<number>) => {
+      state.prospect.userIQ = action.payload;
+    },
   },
 });
 
-export const { setProspect, setEmail, setReponses } = adminSlice.actions;
+export const {
+  setProspect,
+  setEmail,
+  setReponses,
+  setTimer,
+  setUserId,
+  setUserIQ,
+} = adminSlice.actions;
 
 export default adminSlice.reducer;
