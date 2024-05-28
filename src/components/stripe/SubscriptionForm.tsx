@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  addUserToNewPath,
+  removeUserFromPath,
+} from "@/firebase/database/database";
+import { setUserId } from "@/redux/addProspect";
+import { RootState } from "@/redux/store";
+import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
@@ -8,8 +14,9 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // Définir les types pour les langues et le contenu
 type Language = "FR" | "EN";
@@ -23,6 +30,15 @@ const stripePromise = loadStripe(
 );
 
 const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
+  const dispatch = useDispatch();
+  const userEmail = useSelector(
+    (state: RootState) => state.admin.prospect.email
+  );
+  const userId = useSelector((state: RootState) => state.admin.prospect.userId);
+  const user = useSelector((state: RootState) => state.admin.prospect);
+
+  const router = useRouter();
+
   const searchParams = useSearchParams();
   const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
@@ -86,6 +102,28 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
 
       const subscription = await response.json();
       console.log("Subscription successful!", subscription);
+
+      // Additional logic for Firebase operations
+      if (userEmail && userId) {
+        const prospectPath = `prospect/${userId}`;
+        const clientPath = `client/${userId}`;
+
+        try {
+          await addUserToNewPath({ user }, clientPath);
+          console.log("User added to client path:", clientPath);
+          await removeUserFromPath(prospectPath);
+          console.log("User removed from prospect path:", prospectPath);
+
+          dispatch(setUserId(clientPath)); // Save the new client path as the userId
+          router.push(
+            "/dashboard" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")
+          );
+        } catch (firebaseError) {
+          console.error("Firebase operation error: ", firebaseError);
+        }
+      } else {
+        router.push("/" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR"));
+      }
     } catch (error: any) {
       setError(error.message);
       console.error("Error:", error);
@@ -172,7 +210,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
       {error && <div className="text-red text-xs">{error}</div>}
       <button
         type="submit"
-        disabled={!stripe || loading}
+        disabled={!stripe || loading || !userEmail || !userId}
         className="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
       >
         {loading ? "Traitement..." : "COMMENCEZ L'ESSAI DE 7 JOURS"}
@@ -240,7 +278,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
       {error && <div className="text-red text-xs">{error}</div>}
       <button
         type="submit"
-        disabled={!stripe || loading}
+        disabled={!stripe || loading || !userEmail || !userId}
         className="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
       >
         {loading ? "Processing..." : "START 7-DAY TRIAL"}
