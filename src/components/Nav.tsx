@@ -36,7 +36,7 @@ const Nav = () => {
 
   // Update the language state based on URL search parameters
   useEffect(() => {
-    const lang = searchParams.get("lang");
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
