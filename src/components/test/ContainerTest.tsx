@@ -24,7 +24,7 @@ const ContainerTest: React.FC<ContainerTestProps> = ({
   const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
 
   useEffect(() => {
-    const lang = searchParams.get("lang");
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
@@ -57,10 +57,6 @@ const ContainerTest: React.FC<ContainerTestProps> = ({
         return "A";
     }
   };
-
-  useEffect(() => {
-    console.log(addResponse);
-  }, [addResponse]);
 
   return (
     <div className="w-full min-h-[300px] rounded-md mt-5 p-1 md:p-3 flex justify-between flex-col md:flex-row">
