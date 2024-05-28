@@ -25,7 +25,7 @@ const Email = () => {
   );
 
   useEffect(() => {
-    const lang = searchParams.get("lang");
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
@@ -62,7 +62,9 @@ const Email = () => {
       const elements = { email: updateEmail, reponses: state };
       await addProspect(elements);
       dispatch(setEmail(updateEmail));
-      router.push("/resultats");
+      router.push(
+        "/resultats" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")
+      );
     }
   };
 
