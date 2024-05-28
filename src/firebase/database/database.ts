@@ -1,7 +1,7 @@
-import { push, ref, set } from "firebase/database";
+import { push, ref, remove, set } from "firebase/database";
 import { database } from "../firebase.config";
 
-const addProspect = async (
+export const addProspect = async (
   prospectData: Record<string, any>
 ): Promise<string | null> => {
   try {
@@ -24,4 +24,23 @@ const addProspect = async (
   }
 };
 
-export default addProspect;
+export const removeUserFromPath = async (path: string): Promise<void> => {
+  try {
+    await remove(ref(database, path));
+    console.log("User removed successfully from path:", path);
+  } catch (error) {
+    console.error("Error removing user from path: ", error);
+  }
+};
+
+export const addUserToNewPath = async (
+  userData: Record<string, any>,
+  newPath: string
+): Promise<void> => {
+  try {
+    await set(ref(database, newPath), userData);
+    console.log("User added successfully to new path:", newPath);
+  } catch (error) {
+    console.error("Error adding user to new path: ", error);
+  }
+};
