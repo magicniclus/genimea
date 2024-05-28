@@ -48,7 +48,10 @@ const Nav = () => {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
       >
-        <a href="#" className="-m-1.5 p-1.5 flex items-center">
+        <a
+          href={"/" + (selectedLang === "FR" ? "?lang=FR" : "")}
+          className="-m-1.5 p-1.5 flex items-center"
+        >
           <span className="sr-only">Genimea</span>
           <img className="h-8 w-auto" src="./logoWhite.png" alt="logo" />
           <span className="text-white text-xl font-bold ml-1">Genimea</span>
@@ -75,7 +78,7 @@ const Nav = () => {
           ))}
           <LanguageSelect />
           <a
-            href="#"
+            href={"/signin" + (selectedLang === "FR" ? "?lang=FR" : "?lang=EN")}
             className="text-sm font-semibold leading-6 text-white px-2 border border-white rounded-md"
           >
             {content[selectedLang].espace}{" "}
@@ -91,7 +94,10 @@ const Nav = () => {
         <div className="fixed inset-0 z-10 " />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 bg-textBlue">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5 flex items-center">
+            <a
+              href={"/" + (selectedLang === "FR" ? "?lang=FR" : "")}
+              className="-m-1.5 p-1.5 flex items-center"
+            >
               <span className="sr-only">Genimea</span>
               <img className="h-8 w-auto" src="./logoWhite.png" alt="logo" />
               <span className="text-white text-xl font-bold ml-2">Genimea</span>
@@ -120,7 +126,10 @@ const Nav = () => {
               </div>
               <div className="py-6">
                 <a
-                  href="#"
+                  href={
+                    "/signin" +
+                    (selectedLang === "FR" ? "?lang=FR" : "?lang=EN")
+                  }
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-textBlue/70"
                 >
                   {content[selectedLang].espace}
