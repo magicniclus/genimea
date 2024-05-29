@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/**/*.tsx"
+    "src/**/*.tsx",
+    "src/**/*.ts"
   ], // Add the correct path to the "include" section
   "exclude": ["node_modules"]
 }
