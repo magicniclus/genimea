@@ -70,6 +70,10 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Generate random password
+    const randomPassword = generateRandomPassword(12);
+    console.log("Generated password:", randomPassword);
+
     if (!stripe || !elements) {
       return;
     }
@@ -97,7 +101,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
         );
       }
 
-      const response = await fetch("/api/create-subscription", {
+      const subscriptionResponse = await fetch("/api/create-subscription", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,16 +112,38 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
         }),
       });
 
-      if (!response.ok) {
+      if (!subscriptionResponse.ok) {
         throw new Error("Error creating subscription");
       }
 
-      const subscription = await response.json();
+      const subscription = await subscriptionResponse.json();
+      console.log("API response:", subscription); // Log the response
+
+      // Check if subscription.id exists
+      if (!subscription.id) {
+        throw new Error("Stripe subscription ID is undefined");
+      }
+
       console.log("Subscription successful!", subscription);
 
-      // Generate random password
-      const randomPassword = generateRandomPassword(12);
-      console.log("Generated password:", randomPassword);
+      // Send email with credentials
+      const emailResponse = await fetch("/api/sendIdentifiant", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          motDePasse: randomPassword,
+        }),
+      });
+
+      if (!emailResponse.ok) {
+        throw new Error("Error sending email");
+      }
+
+      const emailResult = await emailResponse.json();
+      console.log("Email API response:", emailResult);
 
       // Create user in Firebase Authentication
       const firebaseUser = await createUserWithEmailPassword(
@@ -129,22 +155,33 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
       // Additional logic for Firebase operations
       if (userEmail) {
         const clientPath = `client/${(firebaseUser as any).uid}`;
+        const stripeSubscriptionId = subscription.id;
 
-        try {
-          await addUserToNewPath(user, clientPath);
-          console.log("User added to client path:", clientPath);
-          await removeUserFromPath(`prospect/${userId}`);
-          console.log("User removed from prospect path:", `prospect/${userId}`);
+        if (stripeSubscriptionId) {
+          try {
+            await addUserToNewPath(
+              { ...user, stripeSubscriptionId },
+              clientPath
+            );
+            console.log("User added to client path:", clientPath);
+            await removeUserFromPath(`prospect/${userId}`);
+            console.log(
+              "User removed from prospect path:",
+              `prospect/${userId}`
+            );
 
-          dispatch(setUserId(clientPath));
-          router.push(
-            "/dashboard" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")
-          );
-        } catch (firebaseError) {
-          console.error("Firebase operation error: ", firebaseError);
+            dispatch(setUserId(clientPath));
+            router.push(
+              "/dashboard" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR")
+            );
+          } catch (firebaseError) {
+            console.error("Firebase operation error: ", firebaseError);
+          }
+        } else {
+          console.error("Stripe subscription ID is undefined.");
         }
       } else {
-        router.push("/" + (selectedLang === "EN" ? "/?lang=EN" : "/?lang=FR"));
+        router.push("/" + (selectedLang === "EN" ? "?lang=EN" : "?lang=FR"));
       }
     } catch (error: any) {
       setError(error.message);
@@ -153,7 +190,6 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
 
     setLoading(false);
   };
-
   const elementOptions = {
     style: {
       base: {
