@@ -46,7 +46,7 @@ function classNames(...classes: string[]): string {
 
 const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<UserState | null>(null); // Changez Record<string, any> à UserState
+  const [data, setData] = useState<null | string | any>(null); // Changez Record<string, any> à UserState
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -59,7 +59,7 @@ const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         try {
           const userData = await getDataById(user.uid);
           if (userData) {
-            setData(userData as UserState); // Assurez-vous que userData est du type UserState
+            setData(userData); // Assurez-vous que userData est du type UserState
           }
         } catch (error) {
           console.error(
