@@ -11,28 +11,32 @@ import LanguageSelect from "./buttons/LanguageSelect";
 type Language = "FR" | "EN";
 interface Content {
   espace: string;
+  navigation: { name: string; href: string }[];
 }
 
-const navigation = [
-  { name: "Contact", href: "#" },
-  { name: "FAQ", href: "#FAQ" },
-  { name: "Tarifs", href: "#Pricing" },
-];
+const content: Record<Language, Content> = {
+  FR: {
+    espace: "Mon Espace",
+    navigation: [
+      { name: "Comment ça marche", href: "#how" },
+      { name: "Faits intéressants", href: "#interesting" },
+      { name: "FAQ", href: "#FAQ" },
+    ],
+  },
+  EN: {
+    espace: "My Space",
+    navigation: [
+      { name: "How It Works", href: "#how" },
+      { name: "Interesting Facts", href: "#interesting" },
+      { name: "FAQ", href: "#FAQ" },
+    ],
+  },
+};
 
 const Nav = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const searchParams = useSearchParams();
   const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
-
-  // Content object strictly typed with Language as keys
-  const content: Record<Language, Content> = {
-    FR: {
-      espace: "Mon Espace",
-    },
-    EN: {
-      espace: "My Space",
-    },
-  };
 
   // Update the language state based on URL search parameters
   useEffect(() => {
@@ -41,6 +45,17 @@ const Nav = () => {
       setSelectedLang(lang);
     }
   }, [searchParams]);
+
+  const handleScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <header className="bg-textBlue">
@@ -67,10 +82,11 @@ const Nav = () => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
+          {content[selectedLang].navigation.map((item) => (
             <a
               key={item.name}
               href={item.href}
+              onClick={(e) => handleScroll(e, item.href)}
               className="text-sm font-semibold leading-6 text-white"
             >
               {item.name}
@@ -81,8 +97,7 @@ const Nav = () => {
             href={"/signin" + (selectedLang === "FR" ? "?lang=FR" : "?lang=EN")}
             className="text-sm font-semibold leading-6 text-white px-2 border border-white rounded-md"
           >
-            {content[selectedLang].espace}{" "}
-            {/* <span aria-hidden="true">&rarr;</span> */}
+            {content[selectedLang].espace}
           </a>
         </div>
       </nav>
@@ -114,10 +129,14 @@ const Nav = () => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-white">
               <div className="space-y-2 py-6">
-                {navigation.map((item) => (
+                {content[selectedLang].navigation.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
+                    onClick={(e) => {
+                      handleScroll(e, item.href);
+                      setMobileMenuOpen(false);
+                    }}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-textBlue/70"
                   >
                     {item.name}
