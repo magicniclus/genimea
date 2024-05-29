@@ -2,6 +2,7 @@
 
 "use client";
 
+import { signOutUser } from "@/firebase/auth/authentification";
 import { getDataById } from "@/firebase/database/database"; // Assurez-vous que le chemin est correct
 import { auth } from "@/firebase/firebase.config"; // Assurez-vous que le chemin est correct
 import { setUserInformations } from "@/redux/dataUserManager";
@@ -14,41 +15,47 @@ import {
   MenuItems,
   Transition,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
-
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-];
-
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Dashboard", href: "/dashboard", current: false },
+  //   { name: "Team", href: "#", current: false },
+  //   { name: "Projects", href: "#", current: false },
+  //   { name: "Calendar", href: "#", current: false },
 ];
 
 function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
-const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Provider: React.FC<{ children: React.ReactNode; title?: string }> = ({
+  children,
+  title,
+}) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<null | string | any>(null); // Changez Record<string, any> à UserState
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const userNavigation = [
+    // { name: "Your Profile", onClick: () => router.push("/profile") },
+    { name: "Settings", onClick: () => router.push("/dashboard/settings") },
+    {
+      name: "Sign out",
+      onClick: () =>
+        signOutUser()
+          .then(() => {
+            setLoading(true);
+            console.log("Déconnexion réussie");
+            router.push("/signin");
+          })
+          .finally(() => setLoading(false)),
+    },
+  ];
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -115,7 +122,7 @@ const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     />
                   </div>
                   <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-                    {/* {navigation.map((item) => (
+                    {navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
@@ -129,17 +136,17 @@ const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                       >
                         {item.name}
                       </a>
-                    ))} */}
+                    ))}
                   </div>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                  <button
+                  {/* <button
                     type="button"
                     className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-textBlue focus:ring-offset-2"
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </button> */}
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
@@ -167,10 +174,10 @@ const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                           <MenuItem key={item.name}>
                             {({ active }) => (
                               <a
-                                href={item.href}
+                                onClick={item.onClick}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
                                 )}
                               >
                                 {item.name}
@@ -224,29 +231,26 @@ const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                       alt=""
                     /> */}
                   </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">
-                      {user.name}
-                    </div>
-                    <div className="text-sm font-medium text-gray-500">
-                      {user.email}
+                  <div className="">
+                    <div className="text-base font-medium text-gray-500">
+                      {data.email}
                     </div>
                   </div>
-                  <button
+                  {/* <button
                     type="button"
                     className="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-textBlue focus:ring-offset-2"
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </button> */}
                 </div>
                 <div className="mt-3 space-y-1">
                   {userNavigation.map((item) => (
                     <Disclosure.Button
                       key={item.name}
                       as="a"
-                      href={item.href}
-                      className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                      onClick={item.onClick}
+                      className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 cursor-pointer"
                     >
                       {item.name}
                     </Disclosure.Button>
@@ -262,7 +266,7 @@ const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <header>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
-              Dashboard
+              {title ? title : "Dashboard"}
             </h1>
           </div>
         </header>
