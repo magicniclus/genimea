@@ -92,7 +92,7 @@ const FAQ = () => {
   const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
   useEffect(() => {
-    const lang = searchParams.get("lang");
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
@@ -175,7 +175,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="bg-slate-100">
+    <div className="bg-slate-100" id="FAQ">
       {selectedLang === "FR" ? contentFr() : contentEn()}
     </div>
   );
