@@ -85,7 +85,10 @@ const Stats = () => {
   ];
 
   return (
-    <div className="mx-auto max-w-6xl py-24 md:py-32 lg:py-40 px-4 flex flex-col items-center">
+    <div
+      className="mx-auto max-w-6xl py-24 md:py-32 lg:py-40 px-4 flex flex-col items-center"
+      id="interesting"
+    >
       <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-8">
         {title}
       </h2>
