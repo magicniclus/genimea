@@ -4,7 +4,7 @@ import Provider from "@/components/dashboard/ProviderDashboard";
 const Page = () => {
   return (
     <Provider>
-      <h1>Dashboard</h1>
+      <h1>Hello Word</h1>
     </Provider>
   );
 };
