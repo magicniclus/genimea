@@ -1,7 +1,12 @@
-import React from "react";
+"use client";
+import Provider from "@/components/dashboard/ProviderDashboard";
 
-const page = () => {
-  return <div></div>;
+const Page = () => {
+  return (
+    <Provider>
+      <h1>Dashboard</h1>
+    </Provider>
+  );
 };
 
-export default page;
+export default Page;
