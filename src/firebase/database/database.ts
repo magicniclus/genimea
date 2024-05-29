@@ -1,4 +1,4 @@
-import { push, ref, remove, set } from "firebase/database";
+import { get, push, ref, remove, set } from "firebase/database";
 import { database } from "../firebase.config";
 
 export const addProspect = async (
@@ -42,5 +42,24 @@ export const addUserToNewPath = async (
     console.log("User added successfully to new path:", newPath);
   } catch (error) {
     console.error("Error adding user to new path: ", error);
+  }
+};
+
+// Fonction pour récupérer les données par ID
+export const getDataById = async (
+  id: string
+): Promise<Record<string, any> | null> => {
+  try {
+    const dataRef = ref(database, `/client/${id}`);
+    const snapshot = await get(dataRef);
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      console.log("No data available for the provided ID");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    return null;
   }
 };
