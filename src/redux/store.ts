@@ -1,13 +1,12 @@
-import { combineReducers } from "redux";
-import adminReducer from "./addProspect";
-import userReducer from "./dataUserManager";
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./rootReducer"; // Assurez-vous que le chemin est correct
 
-const rootReducer = combineReducers({
-  admin: adminReducer,
-  user: userReducer,
-  // Ajoutez d'autres slices ici si nécessaire
+const store = configureStore({
+  reducer: rootReducer,
+  // Ajoutez d'autres configurations si nécessaire
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
 
-export default rootReducer;
+export default store;
