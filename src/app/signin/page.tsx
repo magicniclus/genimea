@@ -2,13 +2,15 @@
 
 import Nav from "@/components/Nav";
 import { signInWithEmailPassword } from "@/firebase/auth/authentification"; // Assurez-vous que le chemin est correct
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // Définir les types pour les langues et le contenu
 type Language = "FR" | "EN";
 
 const Page = () => {
+  const router = useRouter();
+
   const searchParams = useSearchParams();
   const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
@@ -43,6 +45,7 @@ const Page = () => {
 
     try {
       await signInWithEmailPassword(email, password);
+      router.push("/dashboard");
       // Redirigez ou effectuez d'autres actions après la connexion réussie
     } catch (err) {
       setError(
