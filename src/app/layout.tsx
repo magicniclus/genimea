@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StoreProvider store={store}>
+    <StoreProvider>
       <html lang="en">
         <head>
           <link rel="icon" href="/logo.png" sizes="any" />
