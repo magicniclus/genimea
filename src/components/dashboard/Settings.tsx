@@ -31,6 +31,11 @@ const Settings: React.FC<SettingsProps> = ({ data }) => {
             </dd>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <a className="text-green-700 text-sm font-medium">
+              Change your password
+            </a>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <a className="text-red text-xs">Unsubscribe</a>
           </div>
         </dl>
