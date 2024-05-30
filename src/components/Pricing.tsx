@@ -25,7 +25,7 @@ const Pricing = () => {
   const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
   useEffect(() => {
-    const lang = searchParams.get("lang");
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
