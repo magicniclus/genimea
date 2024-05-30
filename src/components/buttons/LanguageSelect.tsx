@@ -21,12 +21,12 @@ const LanguageSelect = () => {
 
   // Initializing the selected language state
   const [selectedLang, setSelectedLang] = useState(
-    searchParams.get("lang") || detectLanguage()
+    searchParams?.get("lang") || detectLanguage()
   );
 
   useEffect(() => {
     // Automatically update the URL with detected language if not set
-    if (!searchParams.has("lang")) {
+    if (!searchParams?.has("lang")) {
       const initialLang = detectLanguage();
       const newQuery = createQueryString("lang", initialLang);
       router.push(`${pathname}?${newQuery}`); // Remove the third argument
@@ -48,7 +48,7 @@ const LanguageSelect = () => {
   // Create a query string for the URL
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParams?.toString());
       params.set(name, value);
 
       return params.toString();
