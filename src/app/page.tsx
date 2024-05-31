@@ -1,3 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
+"use client";
+
 import Banner from "@/components/Banner";
 import Cards from "@/components/Cards";
 import Certificat from "@/components/Certificat";
@@ -7,12 +10,48 @@ import Hero from "@/components/Hero";
 import Nav from "@/components/Nav";
 import PointsImportants from "@/components/PointsImportants";
 import Stats from "@/components/Stats";
+import { useSearchParams } from "next/navigation";
+import {
+  Suspense,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-export default function Home() {
+// Définir les types pour les langues et le contenu
+type Language = "FR" | "EN";
+
+const LanguageContext = createContext<Language>("FR");
+
+const useLanguage = () => useContext(LanguageContext);
+
+const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
+  const searchParams = useSearchParams();
+  const [selectedLang, setSelectedLang] = useState<Language>("FR");
+
+  // Update the language state based on URL search parameters
+  useEffect(() => {
+    const lang = searchParams?.get("lang");
+    if (lang === "FR" || lang === "EN") {
+      setSelectedLang(lang);
+    }
+  }, [searchParams]);
+
+  return (
+    <LanguageContext.Provider value={selectedLang}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+const HomeContent = () => {
+  const selectedLang = useLanguage();
+
   return (
     <>
-      <Banner />
       <Nav />
+      <Banner />
       <main className="relative">
         <div
           className="absolute inset-x-0 -top-10 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl"
@@ -53,16 +92,29 @@ export default function Home() {
             />
           </div>
           <Cards />
-          {/* <Header /> */}
           <PointsImportants />
           <Stats />
           <Certificat />
-          {/* <PolarChart /> */}
-          {/* <Pricing /> */}
           <FAQ />
         </div>
       </main>
       <Footer />
     </>
   );
-}
+};
+
+const Home = () => (
+  <Suspense
+    fallback={
+      <div className="h-screen w-screen bg-slate-50 flex justify-center items-center animate-pulse duration-2000 ease-in-out">
+        <img src="/logo.png" alt="logo" className="w-20 h-auto" />
+      </div>
+    }
+  >
+    <LanguageProvider>
+      <HomeContent />
+    </LanguageProvider>
+  </Suspense>
+);
+
+export default Home;
