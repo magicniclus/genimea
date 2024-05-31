@@ -67,7 +67,7 @@ const initialState: { prospect: ProspectState } = {
 };
 
 const adminSlice = createSlice({
-  name: "user",
+  name: "admin",
   initialState,
   reducers: {
     setProspect: (state, action: PayloadAction<ProspectState>) => {
