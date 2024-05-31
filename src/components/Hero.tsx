@@ -85,12 +85,12 @@ const Hero = () => {
           </div>
         </a>
         <div className="flex flex-col md:items-start items-center">
-          <p className="text-md text-gray-500 mt-7 flex items-center">
+          <p className="text-md text-gray-500 mt-7 flex  flex items-center md:flex-row flex-col">
             <CursorArrowRippleIcon className="h-5 w-5 text-textBlue mr-2" />
             <span className="font-bold text-textBlue mr-2">37,000</span> tests
             completed in the last 24 hours
           </p>
-          <p className="text-md text-gray-500 mt-3 flex items-center">
+          <p className="text-md text-gray-500 mt-3 flex  flex items-center md:flex-row flex-col">
             <ArrowTrendingUpIcon className="h-5 w-5 text-textBlue mr-2" />
             <span className="font-bold text-textBlue mr-2">104</span> Average IQ
             score
