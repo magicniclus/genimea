@@ -11,7 +11,8 @@ import Resultat from "@/components/resultat/Resultat";
 import CheckoutForm from "@/components/stripe/CheckoutForm";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { RootState } from "@/redux/store";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 type User = {
@@ -21,6 +22,9 @@ type User = {
   country: string;
   score: number;
 };
+
+// Définir les types pour les langues et le contenu
+type Language = "FR" | "EN";
 
 const userDynamic = [
   {
@@ -44,125 +48,7 @@ const userDynamic = [
     country: "MA",
     score: 76,
   },
-  {
-    firstName: "Liam",
-    lastName: "O'Connor",
-    age: 32,
-    country: "IE",
-    score: 104,
-  },
-  {
-    firstName: "Yara",
-    lastName: "Silva",
-    age: 27,
-    country: "BR",
-    score: 89,
-  },
-  {
-    firstName: "Chen",
-    lastName: "Wang",
-    age: 24,
-    country: "CN",
-    score: 91,
-  },
-  {
-    firstName: "Sophia",
-    lastName: "Schmidt",
-    age: 29,
-    country: "DE",
-    score: 108,
-  },
-  {
-    firstName: "Ivan",
-    lastName: "Petrov",
-    age: 31,
-    country: "RU",
-    score: 92,
-  },
-  {
-    firstName: "Amara",
-    lastName: "Ndiaye",
-    age: 26,
-    country: "SN",
-    score: 95,
-  },
-  {
-    firstName: "Luca",
-    lastName: "Rossi",
-    age: 23,
-    country: "IT",
-    score: 87,
-  },
-  {
-    firstName: "Mia",
-    lastName: "Novak",
-    age: 28,
-    country: "HR",
-    score: 78,
-  },
-  {
-    firstName: "Hassan",
-    lastName: "Ali",
-    age: 27,
-    country: "EG",
-    score: 82,
-  },
-  {
-    firstName: "Anya",
-    lastName: "Kumar",
-    age: 25,
-    country: "IN",
-    score: 90,
-  },
-  {
-    firstName: "Olivia",
-    lastName: "Martin",
-    age: 30,
-    country: "CA",
-    score: 103,
-  },
-  {
-    firstName: "Lucas",
-    lastName: "Mendes",
-    age: 24,
-    country: "PT",
-    score: 88,
-  },
-  {
-    firstName: "Emma",
-    lastName: "Dubois",
-    age: 29,
-    country: "FR",
-    score: 109,
-  },
-  {
-    firstName: "Alex",
-    lastName: "Brown",
-    age: 32,
-    country: "AU",
-    score: 94,
-  },
-  {
-    firstName: "Nina",
-    lastName: "Popova",
-    age: 26,
-    country: "BG",
-    score: 80,
-  },
-  {
-    firstName: "Jorge",
-    lastName: "Fernandez",
-    age: 31,
-    country: "ES",
-    score: 105,
-  },
-  {
-    firstName: "Sara",
-    lastName: "Ahmed",
-    age: 27,
-    country: "SA",
-    score: 97,
-  },
+  // ...
 ];
 
 const items = [
@@ -187,15 +73,33 @@ const items = [
     img: "/icons/msn.svg",
   },
 ];
-const Page = () => {
-  const [index, setIndex] = useState(0);
-  function generateRandomNumber(min = 4000, max = 10000) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 
+const LanguageSelectorClient = ({
+  setSelectedLang,
+}: {
+  setSelectedLang: (lang: Language) => void;
+}) => {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const lang = searchParams?.get("lang");
+    if (lang === "FR" || lang === "EN") {
+      setSelectedLang(lang);
+    }
+  }, [searchParams, setSelectedLang]);
+
+  return null;
+};
+
+const PageContent = ({ selectedLang }: { selectedLang: Language }) => {
+  const [index, setIndex] = useState(0);
   const userEmail = useSelector(
     (state: RootState) => state?.admin?.prospect?.email
   );
+
+  function generateRandomNumber(min = 4000, max = 10000) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -237,6 +141,19 @@ const Page = () => {
         </div>
       </main>
       <Footer />
+    </>
+  );
+};
+
+const Page = () => {
+  const [selectedLang, setSelectedLang] = useState<Language>("FR");
+
+  return (
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <LanguageSelectorClient setSelectedLang={setSelectedLang} />
+        <PageContent selectedLang={selectedLang} />
+      </Suspense>
     </>
   );
 };
