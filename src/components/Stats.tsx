@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import Flag from "react-world-flags";
 
@@ -25,17 +25,16 @@ ChartJS.register(
   Legend
 );
 
-const Stats = () => {
+const StatsContent = () => {
   const searchParams = useSearchParams();
   const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
   useEffect(() => {
-    const lang = searchParams?.get("lang"); // Add null check for searchParams
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
   }, [searchParams]);
-
   const labels =
     selectedLang === "FR"
       ? ["<18 ans", "18-39 ans", "40-59 ans", "59-79 ans", "+ de 80 ans"]
@@ -119,4 +118,12 @@ const Stats = () => {
   );
 };
 
-export default Stats;
+const WrapperComponent = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <StatsContent />
+    </Suspense>
+  );
+};
+
+export default WrapperComponent;
