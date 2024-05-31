@@ -2,7 +2,7 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Flag from "react-world-flags";
 
 type User = {
@@ -20,17 +20,29 @@ type ResultatProps = {
 
 type Language = "FR" | "EN";
 
-const Resultat = ({ index, userDynamic }: ResultatProps) => {
-  const [users, setUsers] = useState<User[]>([userDynamic[0]]);
+const LanguageSelectorClient = ({
+  setSelectedLang,
+}: {
+  setSelectedLang: (lang: Language) => void;
+}) => {
   const searchParams = useSearchParams();
-  const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Par défaut 'FR'
 
   useEffect(() => {
-    const lang = searchParams?.get("lang"); // Ajouter une vérification nulle pour searchParams
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
-  }, [searchParams]);
+  }, [searchParams, setSelectedLang]);
+
+  return null;
+};
+
+const ResultatContent = ({
+  index,
+  userDynamic,
+  selectedLang,
+}: ResultatProps & { selectedLang: Language }) => {
+  const [users, setUsers] = useState<User[]>([userDynamic[0]]);
 
   useEffect(() => {
     const newUser = userDynamic[index];
@@ -134,6 +146,23 @@ const Resultat = ({ index, userDynamic }: ResultatProps) => {
         </div>
       </section>
     </>
+  );
+};
+
+const Resultat = ({ index, userDynamic }: ResultatProps) => {
+  const [selectedLang, setSelectedLang] = useState<Language>("FR");
+
+  return (
+    <Suspense
+      fallback={<div className="text-center text-slate-700">Loading...</div>}
+    >
+      <LanguageSelectorClient setSelectedLang={setSelectedLang} />
+      <ResultatContent
+        index={index}
+        userDynamic={userDynamic}
+        selectedLang={selectedLang}
+      />
+    </Suspense>
   );
 };
 
