@@ -2,11 +2,11 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 type Language = "FR" | "EN";
 
-const Certificat = () => {
+const CertificatContent = () => {
   const searchParams = useSearchParams();
   const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
@@ -66,7 +66,7 @@ const Certificat = () => {
             </a>
           </div>
         </div>
-        <div className="w-6/12 flex justify-cener">
+        <div className="w-6/12 flex justify-center">
           <div className="overflow-hidden rounded-md w-full shadow-lg">
             <img
               src="./images/certificatEn.png"
@@ -83,6 +83,14 @@ const Certificat = () => {
     <div className="bg-white flex">
       {selectedLang === "FR" ? contentFr() : contentEn()}
     </div>
+  );
+};
+
+const Certificat = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CertificatContent />
+    </Suspense>
   );
 };
 
