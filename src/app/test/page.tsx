@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Container from "@/components/test/Container";
@@ -7,7 +8,7 @@ import StepCards from "@/components/test/StepCards";
 import Timer from "@/components/test/Timer";
 import { setReponses, setTimer } from "@/redux/addProspect";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 // Define the types for the languages and content
@@ -19,13 +20,11 @@ interface Question {
   answer: number;
 }
 
-const Page = () => {
+const TestContent = () => {
   const router = useRouter();
-
   const dispatch = useDispatch();
-
   const searchParams = useSearchParams();
-  const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
+  const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
   useEffect(() => {
     const lang = searchParams?.get("lang");
@@ -71,10 +70,15 @@ const Page = () => {
     return Object.values(addResponse).every((value) => value !== null);
   };
 
+  const handleSubmit = async () => {
+    await dispatch(setReponses(addResponse));
+    await dispatch(setTimer(remainingTime));
+    router.push("/test/analyse" + "?lang=" + selectedLang);
+  };
+
   const contentFr = () => {
     return (
       <Container>
-        {/* <h1 className="font-bold text-slate-700">TEST QI</h1> */}
         <ContainerTest
           addResponse={addResponse}
           setAddResponse={setAddResponse}
@@ -125,16 +129,9 @@ const Page = () => {
     );
   };
 
-  const handleSubmit = async () => {
-    await dispatch(setReponses(addResponse));
-    await dispatch(setTimer(remainingTime));
-    router.push("/test/analyse" + "?lang=" + selectedLang);
-  };
-
   const contentEn = () => {
     return (
       <Container>
-        {/* <h1 className="font-bold text-slate-700">IQ TEST</h1> */}
         <ContainerTest
           addResponse={addResponse}
           setAddResponse={setAddResponse}
@@ -193,6 +190,20 @@ const Page = () => {
         <StepCards totalStep={totalStep} setStep={setStep} step={step} />
       </main>
     </>
+  );
+}; // Assurez-vous que le chemin est correct
+
+const Page = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-screen w-screen bg-slate-50 flex justify-center items-center animate-pulse duration-2000 ease-in-out">
+          <img src="/logo.png" alt="logo" className="w-20 h-auto" />
+        </div>
+      }
+    >
+      <TestContent />
+    </Suspense>
   );
 };
 
