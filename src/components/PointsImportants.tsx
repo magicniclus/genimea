@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import {
   BookOpenIcon,
   CubeTransparentIcon,
@@ -7,9 +8,8 @@ import {
   PuzzlePieceIcon,
 } from "@heroicons/react/24/outline";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-// Define the types for the languages and content
 type Language = "FR" | "EN";
 
 const avantageFr = [
@@ -176,6 +176,7 @@ const PointsImportants = () => {
       </div>
     );
   };
+
   return (
     <div className="bg-white py-24 md:py-32 lg:py-40" id="how">
       {selectedLang === "FR" ? contentFr() : contentEn()}
@@ -183,4 +184,12 @@ const PointsImportants = () => {
   );
 };
 
-export default PointsImportants;
+const WrapperComponent = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PointsImportants />
+    </Suspense>
+  );
+};
+
+export default WrapperComponent;
