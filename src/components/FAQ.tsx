@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 // Define the types for the languages and content
 type Language = "FR" | "EN";
@@ -87,97 +87,113 @@ const faqsEn = [
   // More questions...
 ];
 
-const FAQ = () => {
+const LanguageSelectorClient = ({
+  setSelectedLang,
+}: {
+  setSelectedLang: (lang: Language) => void;
+}) => {
   const searchParams = useSearchParams();
-  const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
   useEffect(() => {
     const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
-  }, [searchParams]);
+  }, [searchParams, setSelectedLang]);
 
-  const contentFr = () => {
-    return (
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            F.A.Q
-          </h2>
-          <p className="mt-6 text-base leading-7 text-gray-600">
-            Nous répondons à vos questions les plus fréquentes. Vous avez une
-            autre question et ne trouvez pas la réponse que vous cherchez ?
-            Contactez notre équipe de support en{" "}
-            <a
-              href="mailto:support@genimea.com"
-              className="font-semibold text-textBlue hover:text-textBlue/80"
-            >
-              nous adressant un email,
-            </a>{" "}
-            et nous vous répondrons dans les 24 heures.
-          </p>
-        </div>
-        <div className="mt-20">
-          <dl className="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:gap-x-10">
-            {faqsFr.map((faq) => (
-              <div key={faq.id}>
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  {faq.question}
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">
-                  {faq.answer}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </div>
-    );
-  };
+  return null;
+};
 
-  const contentEn = () => {
-    return (
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
-            Frequently asked questions
-          </h2>
-          <p className="mt-6 text-base leading-7 text-gray-600">
-            We answer your most frequent questions. Do you have another question
-            and can&apos;t find the answer you&apos;re looking for? Please
-            contact our support team{" "}
-            <a
-              href="#"
-              className="font-semibold text-textBlue hover:text-textBlue/80"
-            >
-              by sending us an email,
-            </a>{" "}
-            and we will respond within 24 hours.
-          </p>
-        </div>
-        <div className="mt-20">
-          <dl className="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:gap-x-10">
-            {faqsEn.map((faq) => (
-              <div key={faq.id}>
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  {faq.question}
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">
-                  {faq.answer}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+const FAQContent = ({ selectedLang }: { selectedLang: Language }) => {
+  const contentFr = () => (
+    <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          F.A.Q
+        </h2>
+        <p className="mt-6 text-base leading-7 text-gray-600">
+          Nous répondons à vos questions les plus fréquentes. Vous avez une
+          autre question et ne trouvez pas la réponse que vous cherchez ?
+          Contactez notre équipe de support en{" "}
+          <a
+            href="mailto:support@genimea.com"
+            className="font-semibold text-textBlue hover:text-textBlue/80"
+          >
+            nous adressant un email,
+          </a>{" "}
+          et nous vous répondrons dans les 24 heures.
+        </p>
       </div>
-    );
-  };
+      <div className="mt-20">
+        <dl className="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:gap-x-10">
+          {faqsFr.map((faq) => (
+            <div key={faq.id}>
+              <dt className="text-base font-semibold leading-7 text-gray-900">
+                {faq.question}
+              </dt>
+              <dd className="mt-2 text-base leading-7 text-gray-600">
+                {faq.answer}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  );
+
+  const contentEn = () => (
+    <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24 lg:px-8">
+      <div className="mx-auto max-w-2xl text-center">
+        <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
+          Frequently asked questions
+        </h2>
+        <p className="mt-6 text-base leading-7 text-gray-600">
+          We answer your most frequent questions. Do you have another question
+          and can&apos;t find the answer you&apos;re looking for? Please contact
+          our support team{" "}
+          <a
+            href="mailto:support@genimea.com"
+            className="font-semibold text-textBlue hover:text-textBlue/80"
+          >
+            by sending us an email,
+          </a>{" "}
+          and we will respond within 24 hours.
+        </p>
+      </div>
+      <div className="mt-20">
+        <dl className="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:gap-x-10">
+          {faqsEn.map((faq) => (
+            <div key={faq.id}>
+              <dt className="text-base font-semibold leading-7 text-gray-900">
+                {faq.question}
+              </dt>
+              <dd className="mt-2 text-base leading-7 text-gray-600">
+                {faq.answer}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  );
 
   return (
     <div className="bg-slate-100" id="FAQ">
       {selectedLang === "FR" ? contentFr() : contentEn()}
     </div>
+  );
+};
+
+const FAQ = () => {
+  const [selectedLang, setSelectedLang] = useState<Language>("FR");
+
+  return (
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <LanguageSelectorClient setSelectedLang={setSelectedLang} />
+        <FAQContent selectedLang={selectedLang} />
+      </Suspense>
+    </>
   );
 };
 
