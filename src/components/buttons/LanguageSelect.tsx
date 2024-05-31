@@ -15,8 +15,11 @@ const LanguageSelect = () => {
 
   // Detect browser language or default to 'FR'
   const detectLanguage = () => {
-    const browserLang = navigator.language.slice(0, 2).toUpperCase();
-    return langues.hasOwnProperty(browserLang) ? browserLang : "FR";
+    if (typeof window !== "undefined") {
+      const browserLang = navigator.language.slice(0, 2).toUpperCase();
+      return langues.hasOwnProperty(browserLang) ? browserLang : "FR";
+    }
+    return "FR";
   };
 
   // Initializing the selected language state
