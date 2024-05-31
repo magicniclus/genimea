@@ -38,7 +38,7 @@ const Stats: React.FC<SettingsProps> = ({ data }) => {
           </dd>
         </div>
       </dl>
-      <div className="mt-10 text-xs">
+      <div className="mt-5 text-xs">
         <p className="text-gray-700">
           These calculations are based on a real IQ test, considering your
           results, the total time taken, and your behavior during the test. The
