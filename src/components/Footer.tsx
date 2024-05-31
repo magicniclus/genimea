@@ -10,16 +10,16 @@ type Language = "FR" | "EN";
 const Footer = () => {
   const navigationFr = {
     main: [
-      { name: "Politique de confidentialité", href: "#" },
-      { name: "Conditions générales de vente", href: "#" },
+      { name: "Mentions légales", href: "/mentions-legales" },
+      { name: "Conditions générales de vente", href: "/cgv" },
       { name: "Aide", href: "#" },
     ],
   };
 
   const navigationEn = {
     main: [
-      { name: "Privacy Policy", href: "#" },
-      { name: "Terms & Conditions", href: "#" },
+      { name: "Privacy Policy", href: "/mentions-legales" },
+      { name: "Terms & Conditions", href: "/cgv" },
       { name: "Help", href: "#" },
     ],
   };
