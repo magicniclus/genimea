@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 // Define the types for the languages and content
 type Language = "FR" | "EN";
@@ -10,10 +10,24 @@ interface Content {
   contact: string;
 }
 
-const Banner = () => {
+const LanguageSelectorClient = ({
+  setSelectedLang,
+}: {
+  setSelectedLang: (lang: Language) => void;
+}) => {
   const searchParams = useSearchParams();
-  const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
 
+  useEffect(() => {
+    const lang = searchParams?.get("lang");
+    if (lang === "FR" || lang === "EN") {
+      setSelectedLang(lang);
+    }
+  }, [searchParams, setSelectedLang]);
+
+  return null;
+};
+
+const BannerContent = ({ selectedLang }: { selectedLang: Language }) => {
   // Content object strictly typed with Language as keys
   const content: Record<Language, Content> = {
     FR: {
@@ -25,14 +39,6 @@ const Banner = () => {
       contact: "support@genimea.com",
     },
   };
-
-  // Update the language state based on URL search parameters
-  useEffect(() => {
-    const lang = searchParams?.get("lang");
-    if (lang === "FR" || lang === "EN") {
-      setSelectedLang(lang);
-    }
-  }, [searchParams]);
 
   return (
     <div className="relative isolate flex items-center justify-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5">
@@ -72,14 +78,21 @@ const Banner = () => {
             {content[selectedLang]?.contact}
           </a>
         </p>
-        {/* <a
-          href="#"z
-          className="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-        >
-          Register now <span aria-hidden="true">&rarr;</span>
-        </a> */}
       </div>
     </div>
+  );
+};
+
+const Banner = () => {
+  const [selectedLang, setSelectedLang] = useState<Language>("FR");
+
+  return (
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <LanguageSelectorClient setSelectedLang={setSelectedLang} />
+        <BannerContent selectedLang={selectedLang} />
+      </Suspense>
+    </>
   );
 };
 
