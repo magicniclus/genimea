@@ -1,29 +1,18 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import Nav from "@/components/Nav";
-import { sendPasswordReset } from "@/firebase/auth/authentification"; // Assurez-vous que le chemin est correct
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { sendPasswordReset } from "@/firebase/auth/authentification";
+import { Suspense, useEffect, useState } from "react";
 
 // Définir les types pour les langues et le contenu
 type Language = "FR" | "EN";
 
-const Page = () => {
-  const searchParams = useSearchParams();
-  const [selectedLang, setSelectedLang] = useState<Language>("FR");
-
-  // État pour les champs de formulaire et les messages d'erreur
+// Composant pour gérer le formulaire de réinitialisation de mot de passe
+const PasswordResetForm = ({ selectedLang }: { selectedLang: Language }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-
-  // Update the language state based on URL search parameters
-  useEffect(() => {
-    const lang = searchParams?.get("lang");
-    if (lang === "FR" || lang === "EN") {
-      setSelectedLang(lang);
-    }
-  }, [searchParams]);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -67,7 +56,6 @@ const Page = () => {
             Réinitialisez votre mot de passe
           </h2>
         </div>
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
             <form className="space-y-6" onSubmit={handleSubmit} method="POST">
@@ -91,15 +79,12 @@ const Page = () => {
                   />
                 </div>
               </div>
-
               {error && (
                 <div className="text-red-600 text-sm mt-2">{error}</div>
               )}
-
               {message && (
                 <div className="text-green-600 text-sm mt-2">{message}</div>
               )}
-
               <div>
                 <button
                   type="submit"
@@ -110,13 +95,10 @@ const Page = () => {
               </div>
             </form>
           </div>
-
           <p className="mt-10 text-center text-sm text-gray-500">
-            Pas encore membre ?{" "}
+            Pas encore membre ?
             <a
-              href={
-                "/start" + (selectedLang === "FR" ? "?lang=FR" : "?lang=EN")
-              }
+              href={"/start" + "?lang=FR"}
               className="font-semibold leading-6 text-textBlue hover:text-textBlue/70"
             >
               Commencez
@@ -135,7 +117,6 @@ const Page = () => {
             Reset your password
           </h2>
         </div>
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
             <form className="space-y-6" onSubmit={handleSubmit} method="POST">
@@ -159,32 +140,26 @@ const Page = () => {
                   />
                 </div>
               </div>
-
               {error && (
                 <div className="text-red-600 text-sm mt-2">{error}</div>
               )}
-
               {message && (
                 <div className="text-green-600 text-sm mt-2">{message}</div>
               )}
-
               <div>
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-textBlue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-textBlue/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-textBlue"
                 >
-                  Reset password
+                  {selectedLang === "FR" ? "Envoyer" : "Reset password"}
                 </button>
               </div>
             </form>
           </div>
-
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{" "}
+            Not a member?
             <a
-              href={
-                "/start" + (selectedLang === "FR" ? "?lang=FR" : "?lang=EN")
-              }
+              href={"/start" + "?lang=EN"}
               className="font-semibold leading-6 text-textBlue hover:text-textBlue/70"
             >
               Start
@@ -194,19 +169,35 @@ const Page = () => {
       </div>
     );
   };
+  return <>{selectedLang === "EN" ? contentEn() : contentFr()}</>;
+};
+
+// Composant principal
+const Page = () => {
+  const [selectedLang, setSelectedLang] = useState<Language>("FR");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const lang = urlParams.get("lang");
+      if (lang === "FR" || lang === "EN") {
+        setSelectedLang(lang);
+      }
+    }
+  }, []);
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-50">
-        <body class="h-full">
-        ```
-      */}
-      <Nav />
-      {selectedLang === "FR" ? contentFr() : contentEn()}
+      <Suspense
+        fallback={
+          <div className="h-screen w-screen bg-slate-50 flex justify-center items-center animate-pulse duration-2000 ease-in-out">
+            <img src="/logo.png" alt="logo" className="w-20 h-auto" />
+          </div>
+        }
+      >
+        <Nav />
+        <PasswordResetForm selectedLang={selectedLang} />
+      </Suspense>
     </>
   );
 };
