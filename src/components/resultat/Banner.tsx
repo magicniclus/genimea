@@ -1,22 +1,29 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 // Définir les types pour les langues et le contenu
 type Language = "FR" | "EN";
 
-const Banner = () => {
+const LanguageSelectorClient = ({
+  setSelectedLang,
+}: {
+  setSelectedLang: (lang: Language) => void;
+}) => {
   const searchParams = useSearchParams();
-  const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Par défaut 'FR'
 
   useEffect(() => {
-    const lang = searchParams?.get("lang"); // Ajouter une vérification nulle pour searchParams
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
-  }, [searchParams]);
+  }, [searchParams, setSelectedLang]);
 
+  return null;
+};
+
+const BannerContent = ({ selectedLang }: { selectedLang: Language }) => {
   const contentFr = () => (
     <a href="#checkout" className="text-sm leading-6 text-white cursor-pointer">
       <strong className="font-semibold">Offre de bienvenue spéciale</strong>
@@ -45,9 +52,22 @@ const Banner = () => {
     </a>
   );
 
+  return selectedLang === "FR" ? contentFr() : contentEn();
+};
+
+const Banner = () => {
+  const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Par défaut 'FR'
+
   return (
     <div className="flex items-center gap-x-6 bg-indigo-600 px-6 py-2.5 sm:px-3.5 justify-center flex-col md:flex-col text-center">
-      {selectedLang === "FR" ? contentFr() : contentEn()}
+      <Suspense
+        fallback={
+          <div className="text-white text-sm">Chargement des offres...</div>
+        }
+      >
+        <LanguageSelectorClient setSelectedLang={setSelectedLang} />
+        <BannerContent selectedLang={selectedLang} />
+      </Suspense>
     </div>
   );
 };
