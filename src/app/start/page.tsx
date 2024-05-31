@@ -1,7 +1,9 @@
 import Content from "@/components/start/Content";
+import { Suspense } from "react";
 
 /* eslint-disable @next/next/no-img-element */
-const page = () => {
+
+const StartPageContent = () => {
   return (
     <>
       <header className="w-full">
@@ -46,4 +48,18 @@ const page = () => {
   );
 };
 
-export default page;
+const StartPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-screen w-screen bg-slate-50 flex justify-center items-center animate-pulse duration-2000 ease-in-out">
+          <img src="/logo.png" alt="logo" className="w-20 h-auto" />
+        </div>
+      }
+    >
+      <StartPageContent />
+    </Suspense>
+  );
+};
+
+export default StartPage;
