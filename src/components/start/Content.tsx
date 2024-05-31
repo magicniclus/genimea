@@ -4,7 +4,7 @@
 
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 // Define the types for the languages and content
 type Language = "FR" | "EN";
