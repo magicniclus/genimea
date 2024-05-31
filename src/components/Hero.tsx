@@ -1,22 +1,21 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import {
   ArrowTrendingUpIcon,
   CursorArrowRippleIcon,
 } from "@heroicons/react/24/outline";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-// Define the types for the languages and content
 type Language = "FR" | "EN";
 
 const Hero = () => {
   const searchParams = useSearchParams();
-  const [selectedLang, setSelectedLang] = useState<Language>("FR"); // Default to 'FR'
+  const [selectedLang, setSelectedLang] = useState<Language>("FR");
 
   useEffect(() => {
-    const lang = searchParams?.get("lang"); // Add null check for searchParams
+    const lang = searchParams?.get("lang");
     if (lang === "FR" || lang === "EN") {
       setSelectedLang(lang);
     }
@@ -50,7 +49,7 @@ const Hero = () => {
           <p className="text-md text-gray-500 mt-7 flex items-center md:flex-row flex-col">
             <CursorArrowRippleIcon className="h-5 w-5 text-textBlue mr-2 " />
             <span className="font-bold text-textBlue mr-2">37 000 </span> Tests
-            réalisé ces dernières 24h
+            réalisés ces dernières 24h
           </p>
           <p className="text-md text-gray-500 mt-3 md:mt-0 flex items-center md:flex-row flex-col">
             <ArrowTrendingUpIcon className="h-5 w-5 text-textBlue mr-2" />
@@ -103,7 +102,7 @@ const Hero = () => {
 
   return (
     <section className="w-full relative flex justify-center md:h-[680px] items-center flex-col px-4">
-      <div className=" mx-auto md:bg-white/85 rounded-xl flex md:flex-row flex-col items-center px-4 md:p-24 px-12 py-12 max-x-6xl">
+      <div className=" mx-auto md:bg-white/85 rounded-xl flex md:flex-row flex-col items-center px-4 md:p-24 px-12 py-12 max-w-5xl">
         {selectedLang === "FR" ? contentFr() : contentEn()}
         <div className="relative z-5  group">
           <div className="relative mt-14 md:mt-0">
@@ -129,4 +128,28 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+const Page = () => {
+  const searchParams = useSearchParams();
+  const [selectedLang, setSelectedLang] = useState<Language>("FR");
+
+  useEffect(() => {
+    const lang = searchParams?.get("lang");
+    if (lang === "FR" || lang === "EN") {
+      setSelectedLang(lang);
+    }
+  }, [searchParams]);
+
+  return (
+    <Suspense
+      fallback={
+        <div className="h-screen w-screen bg-slate-50 flex justify-center items-center animate-pulse duration-2000 ease-in-out">
+          <img src="/logo.png" alt="logo" className="w-20 h-auto" />
+        </div>
+      }
+    >
+      <Hero />
+    </Suspense>
+  );
+};
+
+export default Page;
