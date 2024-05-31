@@ -268,6 +268,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
       {error && <div className="text-red text-xs">{error}</div>}
       <button
         type="submit"
+        id="paidSubscriptionButton"
         disabled={!stripe || loading || !userEmail || !userId}
         className="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
       >
@@ -335,6 +336,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ semail }) => {
       </div>
       {error && <div className="text-red text-xs">{error}</div>}
       <button
+        id="paidSubscriptionButton"
         type="submit"
         disabled={!stripe || loading || !userEmail || !userId}
         className="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
