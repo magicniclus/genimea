@@ -109,7 +109,7 @@ const PointsImportants = () => {
             Ce que ce test évalue :
           </h2>
           <a
-            href="/test"
+            href={"/test" + "?lang=FR"}
             className="px-6 py-2 bg-textBlue rounded-md text-white text-2xl mt-7 hover:text-textBlue hover:bg-white hover:border hover:border-textBlue hover:border-2 transition duration-300 ease-in-out text-center md:text-start group flex max-w-[fit-content]"
           >
             {" "}
@@ -149,7 +149,7 @@ const PointsImportants = () => {
             What This Test Evaluates:
           </h2>
           <a
-            href="/test"
+            href={"/test" + "?lang=EN"}
             className="px-6 py-2 bg-textBlue rounded-md text-white text-2xl mt-7 hover:text-textBlue hover:bg-white hover:border hover:border-textBlue hover:border-2 transition duration-300 ease-in-out text-center md:text-start group flex max-w-[fit-content]"
           >
             {" "}
