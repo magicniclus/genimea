@@ -111,7 +111,7 @@ const Hero = () => {
               style={{ zIndex: 10 }}
             ></div>
             <img
-              className="w-[400px] relative z-20 rounded-xl shadow-xl group group-hover:-translate-y-6 group-hover:translate-x-6 transition duration-300 ease-in-out"
+              className="w-[600px] relative z-20 rounded-xl shadow-xl group group-hover:-translate-y-6 group-hover:translate-x-6 transition duration-300 ease-in-out"
               src="./images/computer.png"
               alt="background"
               style={{ zIndex: 20, left: "0", top: "0" }}
