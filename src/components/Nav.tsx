@@ -5,6 +5,7 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import LanguageSelect from "./buttons/LanguageSelect";
 
 type Language = "FR" | "EN";
 interface Content {
@@ -81,6 +82,7 @@ const Nav = ({ selectedLang }: { selectedLang: Language }) => {
                 {item.name}
               </a>
             ))}
+            <LanguageSelect />
             <a
               href={
                 "/signin" + (selectedLang === "FR" ? "?lang=FR" : "?lang=EN")
@@ -135,6 +137,7 @@ const Nav = ({ selectedLang }: { selectedLang: Language }) => {
                     </a>
                   ))}
                 </div>
+                <LanguageSelect />
                 <div className="py-6">
                   <a
                     href={
