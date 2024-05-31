@@ -25,7 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     // Create initial payment of 1.99€
     const initialPaymentIntent = await stripe.paymentIntents.create({
-      amount: 199, // 1.99€ in cents
+      amount: 99, // 1.99€ in cents
       currency: "eur",
       customer: customer.id,
       payment_method: paymentMethodId,
