@@ -29,6 +29,17 @@ const LanguageSelectorClient = ({
   return null;
 };
 
+const scrollToElement = (
+  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  id: string
+) => {
+  event.preventDefault();
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 const HeroContent = ({ selectedLang }: { selectedLang: Language }) => {
   const contentFr = () => {
     return (
@@ -81,6 +92,7 @@ const HeroContent = ({ selectedLang }: { selectedLang: Language }) => {
         </p>
         <a
           href="#checkout"
+          onClick={(e) => scrollToElement(e, "checkout")}
           className="px-6 py-2 bg-yellow rounded-md text-white text-2xl mt-7 hover:bg-yellow-600 transition duration-300 ease-in-out text-center md:text-start group flex"
         >
           Get Your IQ Score Now
