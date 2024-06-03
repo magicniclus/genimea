@@ -74,8 +74,8 @@ export const EmailTemplateIdentifiant: React.FC<EmailTemplateProps> = ({
         <p style={styles.signatureText}>
           Contact us: <br />
           Email:{" "}
-          <a href="mailto:contact@info-autoentreprise.fr">
-            contact@info-autoentreprise.fr
+          <a href="mailto:support@genimea-iq.com">
+            support@genimea-iq.com
           </a>{" "}
           <br />
           {/* Phone: <a href="tel:0956342341">0956342341</a> */}
