@@ -4,6 +4,7 @@
 
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import Avis from "@/components/analyse/Avis";
 import Banner from "@/components/resultat/Banner";
 import Hero from "@/components/resultat/Hero";
 import Resultat from "@/components/resultat/Resultat";
@@ -132,9 +133,9 @@ const PageContent = ({ selectedLang }: { selectedLang: Language }) => {
         </div>
         <CheckoutForm index={index} email={userEmail} />
         <Resultat index={index} userDynamic={userDynamic} />
-        {/* <div className="mt-20">
+        <div className="mt-20">
           <Avis />
-        </div> */}
+        </div>
         <div className="mt-20">
           <FAQ />
         </div>
