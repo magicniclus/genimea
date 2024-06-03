@@ -25,7 +25,7 @@ export default async (req, res) => {
       to: email, // Assurez-vous que cette adresse est valide
       from: "nouveaucontact@prospect-manager.fr",
       subject:
-        "Important: Your login details for accessing your personal space",
+        "GENIMEA Important: Your login details for accessing your personal space",
       html: emailContent,
     };
 
