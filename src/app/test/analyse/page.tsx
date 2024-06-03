@@ -1,4 +1,3 @@
-import Avis from "@/components/analyse/Avis";
 import Content from "@/components/analyse/Content";
 import { Suspense } from "react";
 
@@ -44,7 +43,7 @@ const AnalysePageContent = () => {
           />
         </div>
         <Content />
-        <Avis />
+        {/* <Avis /> */}
       </main>
     </>
   );
