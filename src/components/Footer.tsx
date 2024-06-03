@@ -99,7 +99,7 @@ const Footer = () => {
             <img className="w-8 h-auto" src="./icons/amex.svg" alt="amex" />
           </div>
           <p className="mt-10 text-center text-xs leading-5 text-white">
-            &copy; 2024 Genimea.com, all rights reserved.
+            &copy; 2024 Genimea-iq.com, all rights reserved.
           </p>
         </div>
       </footer>
