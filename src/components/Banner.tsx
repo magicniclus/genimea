@@ -36,7 +36,7 @@ const BannerContent = ({ selectedLang }: { selectedLang: Language }) => {
     },
     EN: {
       question: "Have a question? ",
-      contact: "support@genimea.com",
+      contact: "support@genimea-iq.com",
     },
   };
 
