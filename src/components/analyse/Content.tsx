@@ -136,7 +136,7 @@ const Content = () => {
           score...
         </h1>
         <p className="text-slate-400 text-xs mt-5">
-          Hang tight while our AI brand analyses your answers against the 5 key
+          Please wait while our AI analyzes your answers against the 5 key
           measures of intelligence.
         </p>
         <section className="w-full mt-5">
